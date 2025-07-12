@@ -3,15 +3,14 @@ package PresistentData
    import Minions.OwnedMinion;
    import SharedObjects.Gems.OwnedGem;
    import States.BackgroundMusicTracks;
-   import States.MinionDexID;
    import States.OrientationState;
    import States.TutorialTypes;
-   import States.ModTypes;
    import TopDown.Trainers.TrainerDataObject;
-   import Utilities.Singleton;
    import Utilities.DataEvent;
+   import Utilities.Singleton;
    import Utilities.SocketManager;
    import flash.net.SharedObject;
+   import flash.utils.Dictionary;
    
    public class DynamicData
    {
@@ -140,10 +139,10 @@ package PresistentData
       
       public var m_isExtraSponsorMinionEarned:Boolean;
       
-      public var m_isMod:Vector.<Boolean>; // Single list that contains all the mods that are loaded
-
-      private var socketManager:SocketManager; //SocketManager instance
-
+      public var m_isMod:Dictionary;
+      
+      private var socketManager:SocketManager;
+      
       public function DynamicData()
       {
          super();
@@ -183,46 +182,32 @@ package PresistentData
          this.m_starUpgradeAmounts = new Vector.<int>(8);
          this.m_isMapUnlocked = new Vector.<Boolean>(Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER);
          this.m_hasTutorialsBeenSeen = new Vector.<Boolean>(TutorialTypes.NUM_OF_TUTORIALS);
-         this.m_minionsOwned = new Vector.<Boolean>(MinionDexID.TOTAL_NUM_OF_MINIONS - 4);
-         this.m_minionsSeen = new Vector.<Boolean>(MinionDexID.TOTAL_NUM_OF_MINIONS - 4);
          this.m_ownedGems = new Vector.<OwnedGem>(1485);
          Singleton.staticData.CreateObjectsAfterDynamicData();
          this.LoadInitialData();
-         this.LoadData(this.m_saveSlot); //Loads data at the initial save slot for now. Use other functions for proper stuff
+         this.LoadData(this.m_saveSlot,false);
          this.m_isTalentTreeInSimpleMode = false;
          this.m_isInMysteryMode = false;
          this.m_isMovementTutorialActive = false;
          this.m_movementTutorialStepCounter = 0;
          this.m_numberOfDeathsSinceVictory = 0;
          this.m_numOfAvailbleStars = 1000;
-         this.m_isMod = new Vector.<Boolean>(ModTypes.NUM_MODS) //creates initial list of mods
-         for (var i:int = 0; i < ModTypes.NUM_MODS; i++) {
-            this.m_isMod[i] = false; // defaults all to False
+         this.m_isMod = new Dictionary();
+         var i:int = 0;
+         while(i < Singleton.staticData.m_all_mods.length)
+         {
+            this.m_isMod[Singleton.staticData.m_all_mods[i]] = false;
+            i++;
          }
       }
-
-      public function CreateObjectsBeforeSaveLoad() : void //creates all the objects just before loading the save file. This is necessary because it provides
-      {
-         if(this.getModStatusFromID(ModTypes.MULTI)) //if the multiplayer mode is enabled, we should probably connect now.
-         {
-            socketManager = SocketManager.getInstance(); //get connection instance
-            socketManager.addEventListener(DataEvent.DATA_RECEIVED,onDataReceived);
-            socketManager.isEnabled = true
-         }
-         else //otherwise, we are not multiplayer mode
-         {
-            SocketManager.isEnabled = false  //default connection to false
-         } //add initial setup for the other mods here. Stuff like initialisers, if needed
-
-      }
-
+      
       private function onDataReceived(event:DataEvent) : void
       {
          var data:String = event.data;
          parseAnyData(data);
       }
       
-      private function parseAnyData(data:String) : *  //data processing for multi mode
+      private function parseAnyData(data:String) : *
       {
          var dataArray:Array = data.split("$$");
          var the_type:String = dataArray.shift();
@@ -241,7 +226,7 @@ package PresistentData
          }
       }
       
-      private function parseMinionData(data:String) : OwnedMinion //parse minion data into an OwnedMinion object
+      private function parseMinionData(data:String) : OwnedMinion
       {
          var minionData:Array = data.split("|");
          var minion:OwnedMinion = new OwnedMinion(0);
@@ -257,7 +242,7 @@ package PresistentData
                   minion.minionID = int(value);
                   break;
                case "minionDexID":
-                  minion.m_minionDexID = int(value);
+                  minion.m_minionDexID = int(value) + 3;
                   break;
                case "minionName":
                   minion.m_minionName = value.replace(/\"/g,"");
@@ -403,7 +388,7 @@ package PresistentData
          return minion;
       }
       
-      private function parseList(data:String, separator:String) : Vector.<int> //parse a list of anything with a given separator
+      private function parseList(data:String, separator:String) : Vector.<int>
       {
          var elements:Array = data.split(separator);
          var list:Vector.<int> = new Vector.<int>();
@@ -416,7 +401,7 @@ package PresistentData
          return list;
       }
       
-      private function parseGems(data:String) : Vector.<OwnedGem> //gets a list of gems
+      private function parseGems(data:String) : Vector.<OwnedGem>
       {
          var gemsData:Array = data.split("~");
          var gems:Vector.<OwnedGem> = new Vector.<OwnedGem>(4);
@@ -436,7 +421,7 @@ package PresistentData
          return gems;
       }
       
-      private function parseGem(data:String) : OwnedGem //parses a singular gem
+      private function parseGem(data:String) : OwnedGem
       {
          var gemData:Array = data.split("&");
          var gem:OwnedGem = new OwnedGem();
@@ -475,15 +460,17 @@ package PresistentData
          return gem;
       }
       
-      private function sendData(data:String) : void //send data
+      private function sendData(data:String) : void
       {
          if(!socketManager.isEnabled)
-         socketManager.sendData(data);
+         {
+            socketManager.sendData(data);
+         }
       }
-
-      public function getModStatusFromID(param1:int) : Boolean //param1 is the ID of the mod as per ModTypes.as
+      
+      public function getModStatusFromName(param1:String) : Boolean
       {
-         return this.m_isMod[param1] //returns the bool within the m_isMod thingy
+         return Boolean(this.m_isMod[param1]);
       }
       
       public function get m_currRoomOfTower() : int
@@ -779,8 +766,8 @@ package PresistentData
       
       public function AddToOwnedMinions(param1:OwnedMinion) : void
       {
-         this.m_minionsOwned[param1.m_minionDexID] = true;
-         this.m_minionsSeen[param1.m_minionDexID] = true;
+         this.m_minionsOwned[param1.m_minionDexID - 3] = true;
+         this.m_minionsSeen[param1.m_minionDexID - 3] = true;
          this.m_totalMinions[this.m_saveSlot] = 0;
          var _loc2_:int = 0;
          while(_loc2_ < this.m_minionsOwned.length)
@@ -1328,7 +1315,7 @@ package PresistentData
          return finalReturnArray;
       }
       
-      public function SaveAllData(param1:int) : void //param1 is the ID of the SaveSlot
+      public function SaveAllData(param1:int) : void
       {
          var _loc5_:int = 0;
          this.m_sharedObject = SharedObject.getLocal("TCrpgSaveSlot" + param1);
@@ -1428,8 +1415,14 @@ package PresistentData
             }
             _loc2_++;
          }
-         this.m_sharedObject.flush(); // clear out the save file
-         this.m_sharedObject = SharedObject.getLocal("TCrpgInitialData"); // load initial data
+         var i:int = 0;
+         while(i < Singleton.staticData.m_all_mods.length)
+         {
+            this.SaveValue("m_isMod",i);
+            i++;
+         }
+         this.m_sharedObject.flush();
+         this.m_sharedObject = SharedObject.getLocal("TCrpgInitialData");
          this.SaveValue("m_isSoundOn");
          this.SaveValue("m_isMusicOn");
          this.SaveValue("m_characterNames",param1);
@@ -1438,18 +1431,13 @@ package PresistentData
          this.SaveValue("m_totalStars",param1);
          this.SaveValue("m_isSaveSlotInUse",param1);
          this.SaveValue("m_isMaleMetaData",param1);
-         _loc2_ = 0;
-         while(_loc2_ < ModTypes.NUM_MODS)
-         {
-            this.SaveValue("m_IsMod"+String(_loc2_)+"On",param1)
-         }
          this.m_sharedObject.flush();
          this.m_sharedObject = SharedObject.getLocal("TCrpgSaveSlot" + param1);
       }
       
-      public function LoadData(param1:int) : void
+      public function LoadData(param1:int, param2:Boolean) : void
       {
-         var _loc5_:int = 0;
+         var _loc6_:int = 0;
          if(this.m_resetSaveData)
          {
             SharedObject.getLocal("TCrpgSaveSlot0").clear();
@@ -1481,58 +1469,70 @@ package PresistentData
          this.SetInitialValue("_currSettingMinionID",0);
          this.SetInitialValue("m_areTutorialsOn",true);
          this.SetInitialValue("m_graphicsLevel",2);
-         var _loc2_:int = 0;
-         while(_loc2_ < this.m_starUpgradeAmounts.length)
-         {
-            this.SetInitialValue("m_starUpgradeAmounts",0,_loc2_);
-            _loc2_++;
-         }
          var _loc3_:int = 0;
-         while(_loc3_ < this.m_currTrainerStarCounts.length)
+         while(_loc3_ < this.m_starUpgradeAmounts.length)
          {
-            _loc5_ = 0;
-            while(_loc5_ < this.m_currTrainerStarCounts[_loc3_].length)
-            {
-               this.SetInitialValue("m_currTrainerStarCounts",0,_loc3_,_loc5_);
-               this.SetInitialValue("m_bestTrainerStarCounts",0,_loc3_,_loc5_);
-               this.SetInitialValue("m_hasBeatenTrainer",false,_loc3_,_loc5_);
-               _loc5_++;
-            }
+            this.SetInitialValue("m_starUpgradeAmounts",0,_loc3_);
             _loc3_++;
          }
-         _loc2_ = 0;
-         while(_loc2_ < Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER + Singleton.staticData.NUM_OF_FLOORS_IN_THE_HARD_TOWER)
-         {
-            this.SetInitialValue("m_hasBeatenFloor",false,_loc2_);
-            _loc2_++;
-         }
          var _loc4_:int = 0;
-         while(_loc4_ < 4)
+         while(_loc4_ < this.m_currTrainerStarCounts.length)
          {
-            this.SetInitialValue("m_animateNewFloorActive",false,_loc4_);
+            _loc6_ = 0;
+            while(_loc6_ < this.m_currTrainerStarCounts[_loc4_].length)
+            {
+               this.SetInitialValue("m_currTrainerStarCounts",0,_loc4_,_loc6_);
+               this.SetInitialValue("m_bestTrainerStarCounts",0,_loc4_,_loc6_);
+               this.SetInitialValue("m_hasBeatenTrainer",false,_loc4_,_loc6_);
+               _loc6_++;
+            }
             _loc4_++;
          }
          _loc3_ = 0;
-         while(_loc3_ < this.m_hasTutorialsBeenSeen.length)
+         while(_loc3_ < Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER + Singleton.staticData.NUM_OF_FLOORS_IN_THE_HARD_TOWER)
          {
-            this.SetInitialValue("m_hasTutorialsBeenSeen",false,_loc3_);
+            this.SetInitialValue("m_hasBeatenFloor",false,_loc3_);
             _loc3_++;
          }
-         _loc3_ = 0;
-         while(_loc3_ < this.m_isMapUnlocked.length)
+         var _loc5_:int = 0;
+         while(_loc5_ < 4)
          {
-            this.SetInitialValue("m_isMapUnlocked",false,_loc3_);
-            _loc3_++;
-         }
-         _loc5_ = 0;
-         while(_loc5_ < this.m_minionsOwned.length)
-         {
-            this.SetInitialValue("m_minionsOwned",false,_loc5_);
-            this.SetInitialValue("m_minionsSeen",false,_loc5_);
+            this.SetInitialValue("m_animateNewFloorActive",false,_loc5_);
             _loc5_++;
          }
+         _loc4_ = 0;
+         while(_loc4_ < this.m_hasTutorialsBeenSeen.length)
+         {
+            this.SetInitialValue("m_hasTutorialsBeenSeen",false,_loc4_);
+            _loc4_++;
+         }
+         _loc4_ = 0;
+         while(_loc4_ < this.m_isMapUnlocked.length)
+         {
+            this.SetInitialValue("m_isMapUnlocked",false,_loc4_);
+            _loc4_++;
+         }
+         if(param2)
+         {
+            _loc6_ = 0;
+            while(_loc6_ < Singleton.staticData.m_all_mods.length)
+            {
+               this.SetInitialValue("m_isMod",new Array(true,Singleton.staticData.m_all_mods[_loc6_]));
+               _loc6_++;
+            }
+            Singleton.staticData.CreateFinalInitialThings(this.m_isMod);
+            this.m_minionsOwned = new Vector.<Boolean>(Singleton.staticData.m_TOTAL_MINIONS);
+            this.m_minionsSeen = new Vector.<Boolean>(Singleton.staticData.m_TOTAL_MINIONS);
+            _loc6_ = 0;
+            while(_loc6_ < this.m_minionsOwned.length)
+            {
+               this.SetInitialValue("m_minionsOwned",false,_loc6_);
+               this.SetInitialValue("m_minionsSeen",false,_loc6_);
+               _loc6_++;
+            }
+            this.LoadMinions();
+         }
          this.LoadGems();
-         this.LoadMinions();
       }
       
       private function LoadGems() : void
@@ -1565,7 +1565,7 @@ package PresistentData
          }
       }
       
-      public function LoadInitialData() : void  //ADD HERE
+      public function LoadInitialData() : void
       {
          if(this.m_resetSaveData)
          {
@@ -1583,29 +1583,23 @@ package PresistentData
             this.SetInitialValue("m_totalStars",0,_loc1_);
             this.SetInitialValue("m_isSaveSlotInUse",false,_loc1_);
             this.SetInitialValue("m_isMaleMetaData",true,_loc1_);
-            var _loc2_:int = 0
-            while(_loc2_ < ModTypes.NUM_MODS) //for each mod
-            {
-               this.SetInitialValue("m_IsMod",false,_loc1_,_loc2_); //set value of "m_IsMod[X]On[Y]" to false if not done so already. [X] is the ModType (_loc2_), and [Y] is the SaveSlotID (_loc1_)
-               _loc2_++;
-            }
             _loc1_++;
          }
       }
       
-      private function SetInitialValue(param1:String, param2:Object, param3:int = -99, param4:int = -99) : void //param1 is the name of the entry, param2 is the value to set to it, param3 defines the suffix to add to it because it's incrementing for each one (so 0-2 for save files), and param4 is... we don't care
+      private function SetInitialValue(param1:String, param2:Object, param3:int = -99, param4:int = -99) : void
       {
-         if(param1 == "m_IsMod") //if the param1 is asking for the modType value
+         if(param1 == "m_isMod")
+         {
+            if(this.m_sharedObject.data["m_isMod_" + String(param2[1])] != null)
             {
-               if(this.m_sharedObject.data[param1+String(param4)+"On"+String(param3)] != null) //if there's already a value for it
-               {
-                  this["m_isMod"][param4] = this.m_sharedObject.data[param1+String(param4)+"On"+String(param3)] //set it as the loaded value
-               }
-               else //otherwise, it needs to be created
-               {
-                  this["m_isMod"][param4] = param2 //default value is False
-               }
+               this["m_isMod"][String(param2[1])] = this.m_sharedObject.data["m_isMod_" + String(param2[1])];
             }
+            else
+            {
+               this["m_isMod"][String(param2[1])] = false; //default to false
+            }
+         }
          else if(param3 == -99)
          {
             if(this.m_sharedObject.data[param1] != null)
@@ -1618,7 +1612,7 @@ package PresistentData
                this.m_sharedObject.data[param1] = param2;
             }
          }
-         else if(param4 == -99) //triggers on the case of the "TCrpgInitialData" for multiple save slots
+         else if(param4 == -99)
          {
             if(this.m_sharedObject.data[param1 + param3] != null)
             {
@@ -1641,13 +1635,11 @@ package PresistentData
          }
       }
       
-      private function SaveValue(param1:String, param2:int = -99, param3:int = -99) : void //param1 is the name of the variable to save, param2 is the index to add after it, and param3 is the third index for things with slots (i.e minions)
+      private function SaveValue(param1:String, param2:int = -99, param3:int = -99) : void
       {
-         if(param1.indexOf("m_IsMod")) //if the param1 is a mod index
+         if(param1 =="m_isMod")
          {
-            //_tmpData:int = parseInt(param1.replace("m_IsMod","").split("On")[0]) //gets the ModType index from just the number
-            _tmpData:int = parseInt(param1) //only extracts the ModType integer (possibly?)
-            this.m_sharedObject.data[param1] = this["m_IsMod"][_tmpData] //find the current value and sets it to the data
+            this.m_sharedObject.data["m_isMod_" + String(Singleton.staticData.m_all_mods[param2])] = this.m_isMod[Singleton.staticData.m_all_mods[param2]];
          }
          else if(param2 == -99)
          {

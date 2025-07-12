@@ -154,8 +154,8 @@ package BattleSystems.WinScreen
          _loc3_.SetNewMinion(this.m_currMinion,true);
          this.m_whatsHappeningText.text = this.m_oldBaseMinion.m_baseMinionName + " has grown into a " + this.m_newBaseMinion.m_baseMinionName + "!";
          this.m_closeButton.visible = false;
-         Singleton.dynamicData.SetHasMinionBeenSeen(this.m_newBaseMinion.m_minionDexID,true);
-         Singleton.dynamicData.SetIsMinionOwned(this.m_newBaseMinion.m_minionDexID,true);
+         Singleton.dynamicData.SetHasMinionBeenSeen(this.m_newBaseMinion.m_minionDexID-3,true);
+         Singleton.dynamicData.SetIsMinionOwned(this.m_newBaseMinion.m_minionDexID-3,true);
          TweenLite.to(this,1.5,{"onComplete":this.ExitOut});
       }
       

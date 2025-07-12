@@ -2664,6 +2664,8 @@ package Utilities
       
       private static var miniMap_eggeryOverlay:Class = SpriteHandler_miniMap_eggeryOverlay;
       
+      private static var dirtFish:Class = SpriteHandler_dirtFish;
+      
       private var MAIN_FONT:Class = SpriteHandler_MAIN_FONT;
       
       private var m_currSSIndex:Array;
@@ -2735,12 +2737,12 @@ package Utilities
          var _loc7_:uint = 0;
          var _loc8_:uint = 0;
          var _loc9_:uint = 0;
-         var _loc10_:Number = NaN;
+         var _loc10_:Number = Number(NaN);
          _loc5_ = param1.getPixels(param1.rect);
          _loc6_ = int(_loc5_.length);
          while(true)
          {
-            _loc6_ = _loc6_ - 4;
+            _loc6_ -= 4;
             if(_loc6_ < 0)
             {
                break;
@@ -2779,12 +2781,12 @@ package Utilities
          var _loc7_:uint = 0;
          var _loc8_:uint = 0;
          var _loc9_:uint = 0;
-         var _loc10_:Number = NaN;
+         var _loc10_:Number = Number(NaN);
          _loc5_ = param1.getPixels(param1.rect);
          _loc6_ = int(_loc5_.length);
          while(true)
          {
-            _loc6_ = _loc6_ - 4;
+            _loc6_ -= 4;
             if(_loc6_ < 0)
             {
                break;

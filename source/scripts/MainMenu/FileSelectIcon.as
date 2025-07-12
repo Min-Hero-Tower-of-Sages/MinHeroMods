@@ -197,8 +197,7 @@ package MainMenu
          else
          {
             Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_currLevel = null; //we don't know our current level
-            Singleton.dynamicData.LoadData(this.m_saveSlotID); // now we load the data when selected.
-            Singleton.dynamicData.CreateObjectsBeforeSaveLoad(); //Once loaded, check anything that needs to be done before game start but after the save file is loaded
+            Singleton.dynamicData.LoadData(this.m_saveSlotID,true); // now we load the data when selected.
             Singleton.utility.m_soundController.FadeCurrentMusic(0,1);
             Singleton.utility.m_screenControllers.m_mainMenuScreen.FadeOutForReturnToGame();
             TweenLite.to(this,1,{"onComplete":this.GotoTopdown}); //animation to start the TopDown screen, i.e THE GAME

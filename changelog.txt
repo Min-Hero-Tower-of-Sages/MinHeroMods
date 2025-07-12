@@ -1,0 +1,31 @@
+THINGS I CHANGED:
+
+MinionDexID:
+* Got rid of testing ID 
+* Made the BattleMod IDs first -> everything else is +/- 3
+  * this is needed so the BattleMod doesn't break it
+* Removed total -> Now done in StaticData
+
+Replacing references to total in the following files:
+- AllMinionsContainer
+- MinionPediaMenu
+
+Added Zanyu:
+- Image, SpriteHandler added
+- BaseTalentTreeContainer -> Contains the new skill tree
+- AllMinionsContainer -> Contains the actual minion
+* ADD REWARD IN HATCHERY
+
+Made the LoadData function take a 2nd parameter: a flag if this is the final loading
+Edited in:
+* FileSelectIcon
+
+DONE StaticData:
+* Added dynamic list to access modded DexIDs for minions
+* Added Vector for all minion mods and all mods in general -> MOVES NEED TO BE ADDED
+* Total minion tracker moved here
+
+DONE DynamicData: 
+* Added m_isMod, a dictionary that toggles each mod 
+* If the LoadData has the flag as True, it then actually creates the final stuff
+

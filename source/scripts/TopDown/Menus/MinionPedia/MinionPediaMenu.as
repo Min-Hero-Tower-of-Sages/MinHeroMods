@@ -2,7 +2,6 @@ package TopDown.Menus.MinionPedia
 {
    import Minions.BaseMinion;
    import SharedObjects.BaseInterfacePieces.TCButton;
-   import States.MinionDexID;
    import States.MinionType;
    import States.TopDownMenuState;
    import Utilities.Singleton;
@@ -157,11 +156,11 @@ package TopDown.Menus.MinionPedia
          this.m_minionSelectMask.graphics.endFill();
          _loc1_.addChild(this.m_minionSelectMask);
          this.m_minionSelectHolder.mask = this.m_minionSelectMask;
-         this.m_minionsSelectObjects = new Vector.<MinionPediaMinionSelect>(MinionDexID.TOTAL_NUM_OF_MINIONS - 4);
+         this.m_minionsSelectObjects = new Vector.<MinionPediaMinionSelect>(Singleton.staticData.m_TOTAL_MINIONS - 3);
          var _loc3_:int = 0;
          while(_loc3_ < this.m_minionsSelectObjects.length)
          {
-            this.m_minionsSelectObjects[_loc3_] = new MinionPediaMinionSelect(_loc3_);
+            this.m_minionsSelectObjects[_loc3_] = new MinionPediaMinionSelect(_loc3_+3);
             this.m_minionsSelectObjects[_loc3_].LoadSprites();
             this.m_minionsSelectObjects[_loc3_].y = _loc3_ * 52;
             this.m_minionSelectHolder.addChild(this.m_minionsSelectObjects[_loc3_]);
@@ -184,7 +183,7 @@ package TopDown.Menus.MinionPedia
             this.m_minionsSelectObjects[_loc1_].BringIn();
             _loc1_++;
          }
-         this.SelectMinion(0);
+         this.SelectMinion(3);
          this.m_scrollPosition = 0;
          this.UpdateTheScrollBoxPosition();
       }

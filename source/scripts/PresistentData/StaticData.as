@@ -36,6 +36,7 @@ package PresistentData
    import flash.geom.Point;
    import flash.text.TextFormat;
    import flash.text.TextFormatAlign;
+   import flash.utils.Dictionary;
    
    public class StaticData
    {
@@ -128,6 +129,18 @@ package PresistentData
       
       private var m_currLevel:BaseTopDownLevel;
       
+      public var m_all_mods:Vector.<String>;
+      
+      public var m_all_minion_mods:Vector.<String>;
+
+      public var m_all_non_min_mods:Vector.<String>;
+      
+      public var m_TOTAL_MINIONS:int;
+      
+      public var ModToDexID:Dictionary;
+      
+      public var initDexID:int;
+      
       public function StaticData()
       {
          super();
@@ -138,19 +151,49 @@ package PresistentData
          this.m_trainerSystem = new TrainerSystem();
          this.m_baseMinionMovesList = new AllBaseMovesContainer();
          this.m_baseTalentTreesList = new BaseTalentTreeContainer();
-         this.m_baseMinionsList = new AllMinionsContainer();
          this.SetupTheTrainerInfo();
          this.SetupTextFormats();
          this.SetupLevels();
          this.SetupTypeEffectivenessArray();
          this.SetupStagesArrays();
-         this.SetupTheEggeryInfo();
          this.SetupTheEnemyStatBonuses();
+         trace("Creating index of all installed mods");
+         this.m_all_minion_mods = new Vector.<String>();
+         this.m_all_minion_mods.push("dirtFish"); //add minion mods here
+         this.m_all_mods = new Vector.<String>();
+         this.m_all_non_min_mods = new Vector.<String>();
+         //this.m_all_non_min_mods.push() //add non-minion mods here
+         this.m_all_mods = this.m_all_minion_mods.concat(this.m_all_non_min_mods)
+         this.initDexID = 105; //first free slot
       }
       
       public function CreateObjectsAfterDynamicData() : void
       {
          this.m_trainerSystem.CreateFloors();
+      }
+      
+      public function CreateFinalInitialThings(param1:Object) : void
+      {
+         CreateDexIndex(param1);
+         this.m_baseMinionsList = new AllMinionsContainer();
+         this.SetupTheEggeryInfo();
+      }
+      
+      public function CreateDexIndex(param1:Object) : void
+      {
+         this.ModToDexID = new Dictionary();
+         for(var k in param1)
+         {
+            var modState:Boolean = Boolean(param1[k]);
+            var modName:String = k;
+            if((this.m_all_minion_mods.indexOf(modName) != -1) && modState)
+            {
+               ModToDexID[modName] = this.initDexID;
+               //throw new Error("'" + modName + "' has been given the DexID of " + String(ModToDexID[modName]));
+               this.initDexID++;
+            }
+         }
+         this.m_TOTAL_MINIONS = this.initDexID;
       }
       
       private function SetupTheTrainerInfo() : void
@@ -384,12 +427,25 @@ package PresistentData
          this.AddMinionToEggery(MinionDexID.DEX_ID_holyMantris_1,5,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_iceBird_1,10,_loc2_);
          _loc2_ = 21;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_iceTree_1,10,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_grassSnake_3,25,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_landShark_1,35,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_groundAttacker_2,20,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_flyingGrassSuperMinion_1,5,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_tRex_2,5,_loc2_);
+         if(Singleton.dynamicData.m_isMod["dirtFish"])
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_iceTree_1,9,_loc2_);
+            this.AddMinionToEggery(this.ModToDexID["dirtFish"],9,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_grassSnake_3,23,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_landShark_1,31,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_groundAttacker_2,19,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_flyingGrassSuperMinion_1,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_tRex_2,5,_loc2_);
+         }
+         else
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_iceTree_1,10,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_grassSnake_3,25,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_landShark_1,35,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_groundAttacker_2,20,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_flyingGrassSuperMinion_1,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_tRex_2,5,_loc2_);
+         }
          _loc2_ = 22;
          this.AddMinionToEggery(MinionDexID.DEX_ID_fire_frog_1,10,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_groundMole_3,35,_loc2_);
@@ -2593,10 +2649,10 @@ package PresistentData
          var _loc7_:Number = param1 + param2 * Math.random();
          var _loc8_:Number = param3;
          var _loc10_:Number = _loc6_ * 3 / 5 + 2;
-         _loc10_ = _loc10_ * _loc7_;
-         _loc10_ = _loc10_ * _loc8_;
-         _loc10_ = _loc10_ * 1;
-         _loc10_ = _loc10_ / 3000;
+         _loc10_ *= _loc7_;
+         _loc10_ *= _loc8_;
+         _loc10_ *= 1;
+         _loc10_ /= 3000;
          return Math.ceil(_loc10_);
       }
    }

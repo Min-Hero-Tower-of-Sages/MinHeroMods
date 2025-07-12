@@ -8,6 +8,7 @@ The functions can then be used in the following applications/ideas:
 
 There are some utilities in here too:
 * AutoIndent -> automatically indents a string block X times, which is useful when needing to match an indent level
+* BuildSkillTreeLog -> Takes the path to the file that contains all the skill trees, and outputs a list of names. Important for verifying what can and cannot be set
 
 See the "init" dictionaries for the format that is required, happy modding!
 """
@@ -25,7 +26,6 @@ def CalcMinionHealingSimple(baseEnergy):      return ((baseEnergy * 3)+5)
 def ReverseMinionHealingSimple(finalEnergy):  return ((finalEnergy) - 5)/3
 def CalcMinionSpeedSimple(baseEnergy):        return ((baseEnergy * 3)+5)
 def ReverseMinionSpeedSimple(finalEnergy):    return ((finalEnergy) - 5)/3
-
 
 
 #-> options for EXP_Gain_Rate option, ordered by the increase
@@ -134,9 +134,7 @@ def AutoSkillTree(init_dict):
   output += "\n\treturn _loc1_;\n}\n" #closing part
   return output
 
-
-
-def AutoMinionCreator(init_dict):
+def AutoMinionCreator(init_dict,isForModEco=True):
   """Creates the necessary minion code from an input dict to be able to add into the game!
   """
   #verification stuff
@@ -151,11 +149,16 @@ def AutoMinionCreator(init_dict):
   except:
     evolvesTo = None
   name = init_dict["name"]
-  codename = init_dict["codename"]
+  codename = init_dict["codename"] 
   output = f"private function {codename}_stage{init_dict['evoLevel']}() : void\n" + "{\n\tvar _loc2_:MinionTalentTree = null;\n\t" #declaration
 
   #MAIN CONSTRUCTOR
-  output += f'var _loc1_:BaseMinion = this.CM(MinionDexID.DEX_ID_{codename}_{init_dict["evoLevel"]},"{name}","{codename}",{round(ReverseMinionHealthSimple(init_dict["health"]))},{round(ReverseMinionEnergySimple(init_dict["energy"]))},{round(ReverseMinionAttackSimple(init_dict["attack"]))},{round(ReverseMinionHealingSimple(init_dict["healing"]))},{round(ReverseMinionSpeedSimple(init_dict["speed"]))}'
+  if not isForModEco:
+    output += f'var _loc1_:BaseMinion = this.CM(MinionDexID.DEX_ID_{codename}_{init_dict["evoLevel"]}'
+  else:
+    output += f'var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["{codename}_{init_dict["evoLevel"]}"]'
+    
+  output += f',"{name}","{codename}",{round(ReverseMinionHealthSimple(init_dict["health"]))},{round(ReverseMinionEnergySimple(init_dict["energy"]))},{round(ReverseMinionAttackSimple(init_dict["attack"]))},{round(ReverseMinionHealingSimple(init_dict["healing"]))},{round(ReverseMinionSpeedSimple(init_dict["speed"]))}'
   
   #ADDING TYPES
   if len(init_dict["Types"]) == 2 and type(init_dict["Types"]) == list:
@@ -193,6 +196,7 @@ def AutoMinionCreator(init_dict):
   return output
 
 
+
 #skill tree creation
 #print(AutoSkillTree(init_skill_tree))
 
@@ -201,9 +205,10 @@ def AutoMinionCreator(init_dict):
 print("INTO 'All<inionsContainer.as': ")
 print(AutoMinionCreator(init_minion)+"\n")
 
+'''
 print("NOTE: The following extra modifications will be needed:")
 print("* The skill tree (if not added already)")
 print("* The DexID (added into MinionDexID.as)")
 print("* Declarative stuff for the image (SpriteHandler, unique script for it, actual image, SymbolClass modification)")
 
-
+'''

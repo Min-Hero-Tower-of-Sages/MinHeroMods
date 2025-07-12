@@ -538,7 +538,7 @@ package MainMenu
       private function SkipButtonPressed(param1:MouseEvent) : void  //tutorial creation beyond skip
       {
          TweenLite.killTweensOf(this); //stop rendering everything lol
-         Singleton.dynamicData.LoadData(Singleton.dynamicData.m_saveSlot); //load data
+         Singleton.dynamicData.LoadData(Singleton.dynamicData.m_saveSlot,true); //load data
          this.AddInitialMinions(); //initial minions
          Singleton.utility.m_screenControllers.SetSceneTo(GameState.TOP_DOWN_SCREEN,true,0.5);
          Singleton.utility.m_soundController.FadeCurrentMusic(0.1,0.8);
@@ -767,7 +767,7 @@ package MainMenu
          }));
          _loc3_.append(new TweenLite(this,10.05,{
             "onComplete":Singleton.dynamicData.LoadData, //text fade leads to loading data
-            "onCompleteParams":[Singleton.dynamicData.m_saveSlot]
+            "onCompleteParams":[Singleton.dynamicData.m_saveSlot,true]
          }));
          _loc3_.append(new TweenLite(this,0.05,{"onComplete":this.AddInitialMinions}));
          _loc3_.append(new TweenLite(this,0.8,{
@@ -835,16 +835,17 @@ package MainMenu
       {
          Singleton.utility.m_stage.removeEventListener(MouseEvent.CLICK,this.CheckToActivateSkipButton);
          this.m_skipIntroButton.alpha = 0;
-         var _loc1_:OwnedMinion = new OwnedMinion(MinionDexID.DEX_ID_Tiger_1);
-         Singleton.dynamicData.AddToOwnedMinions(_loc1_);
-         _loc1_.SetLevel(5);
-         _loc1_.m_currentExp += 300;
-         _loc1_.CalculateCurrStats();
-         _loc1_.ReFillHealthAndEnergy();
          _loc1_ = new OwnedMinion(MinionDexID.DEX_ID_fire_pig_1);
          Singleton.dynamicData.AddToOwnedMinions(_loc1_);
          _loc1_.SetLevel(4);
          _loc1_.m_currentExp += 350;
+         _loc1_.CalculateCurrStats();
+         _loc1_.ReFillHealthAndEnergy();
+         throw new Error(Singleton.staticData.ModToDexID["dirtFish"])
+         _loc1_ = new OwnedMinion(Singleton.staticData.ModToDexID["dirtFish"]); //this don't
+         Singleton.dynamicData.AddToOwnedMinions(_loc1_);
+         _loc1_.SetLevel(5);
+         _loc1_.m_currentExp += 300;
          _loc1_.CalculateCurrStats();
          _loc1_.ReFillHealthAndEnergy();
          Singleton.dynamicData.SetHasUnlockedFloor(0,true);

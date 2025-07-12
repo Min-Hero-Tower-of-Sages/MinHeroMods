@@ -14,7 +14,10 @@ package Minions
       public function AllMinionsContainer()
       {
          super();
-         this.m_allMinions = new Vector.<BaseMinion>(MinionDexID.TOTAL_NUM_OF_MINIONS);
+         this.m_allMinions = new Vector.<BaseMinion>(Singleton.staticData.m_TOTAL_MINIONS);
+         this.BattleMod_stage1();
+         this.BattleMod_stage2();
+         this.BattleMod_stage3();
          this.FirePig_stage1();
          this.FirePig_stage2();
          this.FirePig_stage3();
@@ -117,10 +120,10 @@ package Minions
          this.UndeadEel_stage1();
          this.Titan1_stage1();
          this.Titan2_stage1();
-         this.BattleMod_stage1();
-         this.BattleMod_stage2();
-         this.BattleMod_stage3();
-         this.CreateTestingMinion();
+         if(Singleton.dynamicData.getModStatusFromName("dirtFish"))
+         {
+            this.dirtFish_stage1();
+         }
       }
       
       private function CM(param1:int, param2:String, param3:String, param4:int, param5:int, param6:int, param7:int, param8:int, param9:int, param10:int = 0) : BaseMinion
@@ -143,6 +146,25 @@ package Minions
       public function GetBaseMinion(param1:int) : BaseMinion
       {
          return this.m_allMinions[param1];
+      }
+      
+      private function dirtFish_stage1() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["dirtFish"],"Zanyu","dirtFish",80,60,85,15,55,MinionType.TYPE_Flying,MinionType.Earth);
+         _loc1_.m_minionIconPositioningX = -5;
+         _loc1_.m_minionIconPositioningY = -60;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD;
+         _loc1_.m_numberOfGems = 3;
+         _loc1_.m_numberOfLockedGems = 1;
+         _loc1_.AddStartingMove(MinionMoveID.pound_t2);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.stone_fall_t1,MinionMoveID.flurry_t1,MinionMoveID.mirror_skin_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.GroundAttacker_Ground();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.DirtFish_Flying();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.HummingBird_Normal();
+         _loc1_.SetTalentTree(2,_loc2_);
       }
       
       private function BatDemon_stage1() : void
@@ -2262,3 +2284,4 @@ package Minions
       }
    }
 }
+
