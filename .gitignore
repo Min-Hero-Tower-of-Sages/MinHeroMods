@@ -15,3 +15,5 @@ square's notes on modloader system.txt
 
 #my batch script to start it faster
 start.bat
+#I probably don't need one here, but I can't be asked to delete it
+FlashPlayer.exe 
