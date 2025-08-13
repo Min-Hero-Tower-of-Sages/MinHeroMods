@@ -4,8 +4,8 @@
 file_changes.csv
 # auto-generated folder for all the modified scripts
 /modified
+#link to logs
 Logs - Raccourci.lnk
-Logs - Shortcut.lnk
 # folder created due to vscode
 /.vscode
 # personal note for myself: can be removed if anyone wants to see me natter on lol
@@ -17,3 +17,5 @@ square's notes on modloader system.txt
 start.bat
 #I probably don't need one here, but I can't be asked to delete it
 FlashPlayer.exe 
+# link to save files for the default.swf when tested on me PC
+SWF Saves - Shortcut.lnk

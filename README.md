@@ -21,6 +21,7 @@ This is **NOT backwards-compatiable**, so if you create a save that contains Zan
 
 * Zanyu
 * BetterGems
+* Deleted SoGood intro (for the greater good)
 
 ## TODO:
 
