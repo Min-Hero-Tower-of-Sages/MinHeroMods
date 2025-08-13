@@ -162,7 +162,7 @@ package BattleSystems
          Singleton.dynamicData.m_isSoundOn = this.m_muteSoundButton.m_isToggleOn;
       }
       
-      override public function StartActivate() : void
+      override public function StartActivate(isFirstTime:Boolean=false) : void
       {
          super.StartActivate();
          this.m_muteSoundButton.m_isToggleOn = Singleton.dynamicData.m_isSoundOn;
@@ -185,7 +185,7 @@ package BattleSystems
          {
             if(Singleton.dynamicData.m_opponentsMinions[_loc2_] != null)
             {
-               Singleton.dynamicData.SetHasMinionBeenSeen(Singleton.dynamicData.m_opponentsMinions[_loc2_].m_minionDexID-3,true);
+               Singleton.dynamicData.SetHasMinionBeenSeen(Singleton.dynamicData.m_opponentsMinions[_loc2_].m_minionDexID,true);
                Singleton.dynamicData.m_opponentsMinions[_loc2_].SetupForCombat();
                Singleton.dynamicData.m_opponentsMinions[_loc2_].CalculateCurrStats();
             }

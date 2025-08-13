@@ -359,7 +359,7 @@ package MainMenu
          this.m_currState = MainMenuStates.MAIN_MENU_ANIMATING;
       }
       
-      override public function StartActivate() : void
+      override public function StartActivate(isFirstTime:Boolean=false) : void
       {
          super.StartActivate();
          Singleton.dynamicData.LoadInitialData();
@@ -537,10 +537,10 @@ package MainMenu
       
       private function SkipButtonPressed(param1:MouseEvent) : void  //tutorial creation beyond skip
       {
-         TweenLite.killTweensOf(this); //stop rendering everything lol
+         TweenLite.killTweensOf(this); 
          Singleton.dynamicData.LoadData(Singleton.dynamicData.m_saveSlot,true); //load data
          this.AddInitialMinions(); //initial minions
-         Singleton.utility.m_screenControllers.SetSceneTo(GameState.TOP_DOWN_SCREEN,true,0.5);
+         Singleton.utility.m_screenControllers.SetSceneTo(GameState.TOP_DOWN_SCREEN,true,0.5,isFirstTime=true);
          Singleton.utility.m_soundController.FadeCurrentMusic(0.1,0.8);
       }
       
@@ -841,7 +841,6 @@ package MainMenu
          _loc1_.m_currentExp += 350;
          _loc1_.CalculateCurrStats();
          _loc1_.ReFillHealthAndEnergy();
-         throw new Error(Singleton.staticData.ModToDexID["dirtFish"])
          _loc1_ = new OwnedMinion(Singleton.staticData.ModToDexID["dirtFish"]); //this don't
          Singleton.dynamicData.AddToOwnedMinions(_loc1_);
          _loc1_.SetLevel(5);

@@ -139,7 +139,7 @@ package TopDown.Menus
          this.m_iconBackground.x = 5;
          this.m_iconBackground.y = 5;
          addChild(this.m_iconBackground);
-         this.m_minionIcon = Singleton.utility.m_spriteHandler.CreateSprite(_loc3_.m_minionBattleSprite);
+         this.m_minionIcon = Singleton.utility.m_spriteHandler.CreateSprite(_loc3_.m_minionBattleSprite); //THIS THINGIE ERRORS
          this.m_minionIcon.x = _loc3_.m_minionIconPositioningX;
          this.m_minionIcon.y = _loc3_.m_minionIconPositioningY;
          this.m_minionIcon.cacheAsBitmap = true;

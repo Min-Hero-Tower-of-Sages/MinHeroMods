@@ -159,7 +159,7 @@ package Minions
          var baseMinion:BaseMinion = this.m_baseMinion;
          var ownedMinionData:String = "{";
          ownedMinionData += "\"minionID\": " + this.minionID + ", ";
-         ownedMinionData += "\"minionDexID\": " + this.m_minionDexID-3 + ", ";
+         ownedMinionData += "\"minionDexID\": " + this.m_minionDexID + ", ";
          ownedMinionData += "\"minionName\": \"" + this.m_minionName + "\", ";
          ownedMinionData += "\"isPlayersMinion\": " + this.m_isPlayersMinion + ", ";
          ownedMinionData += "\"trainerType\": " + this.m_trainerType + ", ";
@@ -227,7 +227,7 @@ package Minions
          ownedMinionData += "\"currRedirectDamage\": " + this.m_currRedirectDamage + " ";
          ownedMinionData += "}";
          var baseMinionData:String = "{";
-         baseMinionData += "\"minionDexID\": " + baseMinion.m_minionDexID-3 + ", ";
+         baseMinionData += "\"minionDexID\": " + baseMinion.m_minionDexID + ", ";
          baseMinionData += "\"baseMinionName\": \"" + baseMinion.m_baseMinionName + "\", ";
          baseMinionData += "\"minionBattleSprite\": \"" + baseMinion.m_minionBattleSprite + "\", ";
          baseMinionData += "\"minionIconPositioningX\": " + baseMinion.m_minionIconPositioningX + ", ";
@@ -1316,7 +1316,7 @@ package Minions
       public function SaveMinionAtSlot(param1:int) : void
       {
          Singleton.dynamicData.m_sharedObject.data["minion" + param1] = true;
-         Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "dexID"] = this.m_minionDexID-3;
+         Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "dexID"] = this.m_minionDexID;
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "name"] = this.m_minionName;
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "exp"] = this.m_currentExp;
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "statBonus"] = this.m_statBonus;

@@ -192,6 +192,7 @@ package PresistentData
          this.m_movementTutorialStepCounter = 0;
          this.m_numberOfDeathsSinceVictory = 0;
          this.m_numOfAvailbleStars = 1000;
+         trace("Creating initial mod profile")
          this.m_isMod = new Dictionary();
          var i:int = 0;
          while(i < Singleton.staticData.m_all_mods.length)
@@ -199,6 +200,7 @@ package PresistentData
             this.m_isMod[Singleton.staticData.m_all_mods[i]] = false;
             i++;
          }
+         trace("Done initial mod profile")
       }
       
       private function onDataReceived(event:DataEvent) : void
@@ -242,7 +244,7 @@ package PresistentData
                   minion.minionID = int(value);
                   break;
                case "minionDexID":
-                  minion.m_minionDexID = int(value) + 3;
+                  minion.m_minionDexID = int(value);
                   break;
                case "minionName":
                   minion.m_minionName = value.replace(/\"/g,"");
@@ -766,8 +768,8 @@ package PresistentData
       
       public function AddToOwnedMinions(param1:OwnedMinion) : void
       {
-         this.m_minionsOwned[param1.m_minionDexID - 3] = true;
-         this.m_minionsSeen[param1.m_minionDexID - 3] = true;
+         this.m_minionsOwned[param1.m_minionDexID] = true;
+         this.m_minionsSeen[param1.m_minionDexID] = true;
          this.m_totalMinions[this.m_saveSlot] = 0;
          var _loc2_:int = 0;
          while(_loc2_ < this.m_minionsOwned.length)
@@ -1520,6 +1522,12 @@ package PresistentData
                this.SetInitialValue("m_isMod",new Array(true,Singleton.staticData.m_all_mods[_loc6_]));
                _loc6_++;
             }
+            trace("dynamicData has the following mod configuration:");
+            for (var k:Object in this.m_isMod) {
+               var value:Boolean = this.m_isMod[k];
+               var key:String = k;
+               trace(" - " + key + ": " + value);
+            }
             Singleton.staticData.CreateFinalInitialThings(this.m_isMod);
             this.m_minionsOwned = new Vector.<Boolean>(Singleton.staticData.m_TOTAL_MINIONS);
             this.m_minionsSeen = new Vector.<Boolean>(Singleton.staticData.m_TOTAL_MINIONS);
@@ -1597,7 +1605,7 @@ package PresistentData
             }
             else
             {
-               this["m_isMod"][String(param2[1])] = false; //default to false
+               this["m_isMod"][String(param2[1])] = true; //default to false
             }
          }
          else if(param3 == -99)

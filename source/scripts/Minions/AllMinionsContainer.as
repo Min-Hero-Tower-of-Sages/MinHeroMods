@@ -14,10 +14,8 @@ package Minions
       public function AllMinionsContainer()
       {
          super();
+         trace("Initalising all minions...")
          this.m_allMinions = new Vector.<BaseMinion>(Singleton.staticData.m_TOTAL_MINIONS);
-         this.BattleMod_stage1();
-         this.BattleMod_stage2();
-         this.BattleMod_stage3();
          this.FirePig_stage1();
          this.FirePig_stage2();
          this.FirePig_stage3();
@@ -120,10 +118,15 @@ package Minions
          this.UndeadEel_stage1();
          this.Titan1_stage1();
          this.Titan2_stage1();
-         if(Singleton.dynamicData.getModStatusFromName("dirtFish"))
+         trace("All vanilla minions created...")
+         if(Singleton.dynamicData.getModStatusFromName("dirtFish")) //add each mod creation like so. This will basically mirror the DexID creation process, such that the index to access this will be the correct one
          {
             this.dirtFish_stage1();
          }
+         this.BattleMod_stage1();
+         this.BattleMod_stage2();
+         this.BattleMod_stage3();
+         trace("Completed!")
       }
       
       private function CM(param1:int, param2:String, param3:String, param4:int, param5:int, param6:int, param7:int, param8:int, param9:int, param10:int = 0) : BaseMinion
@@ -151,7 +154,8 @@ package Minions
       private function dirtFish_stage1() : void
       {
          var _loc2_:MinionTalentTree = null;
-         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["dirtFish"],"Zanyu","dirtFish",80,60,85,15,55,MinionType.TYPE_Flying,MinionType.Earth);
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["dirtFish"],"Zanyu","dirtFish",80,60,85,15,55,MinionType.TYPE_FLYING,MinionType.TYPE_EARTH);
+         trace("Created Zanyu at the index " + String(Singleton.staticData.ModToDexID["dirtFish"]));
          _loc1_.m_minionIconPositioningX = -5;
          _loc1_.m_minionIconPositioningY = -60;
          _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD;
@@ -2203,7 +2207,7 @@ package Minions
       private function BattleMod_stage1() : void
       {
          var _loc2_:MinionTalentTree = null;
-         var _loc1_:BaseMinion = this.CM(MinionDexID.DEX_ID_battleModMinion_1,"BMod 1","generalRoom_healStone",10,10,10,10,10,MinionType.TYPE_NORMAL);
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["BMod 1"],"BMod 1","generalRoom_healStone",10,10,10,10,10,MinionType.TYPE_NORMAL);
          _loc1_.m_minionIconPositioningX = -2;
          _loc1_.m_minionIconPositioningY = 8;
          _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_NORMAL;
@@ -2222,7 +2226,7 @@ package Minions
       private function BattleMod_stage2() : void
       {
          var _loc2_:MinionTalentTree = null;
-         var _loc1_:BaseMinion = this.CM(MinionDexID.DEX_ID_battleModMinion_2,"BMod 2","generalRoom_healStone",40,40,40,40,40,MinionType.TYPE_NORMAL);
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["BMod 2"],"BMod 2","generalRoom_healStone",40,40,40,40,40,MinionType.TYPE_NORMAL);
          _loc1_.m_minionIconPositioningX = -2;
          _loc1_.m_minionIconPositioningY = 8;
          _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_NORMAL;
@@ -2241,7 +2245,7 @@ package Minions
       private function BattleMod_stage3() : void
       {
          var _loc2_:MinionTalentTree = null;
-         var _loc1_:BaseMinion = this.CM(MinionDexID.DEX_ID_battleModMinion_3,"BMod 3","generalRoom_healStone",100,100,100,100,100,MinionType.TYPE_NORMAL);
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["BMod 3"],"BMod 3","generalRoom_healStone",100,100,100,100,100,MinionType.TYPE_NORMAL);
          _loc1_.m_minionIconPositioningX = -2;
          _loc1_.m_minionIconPositioningY = 8;
          _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_NORMAL;
@@ -2254,32 +2258,6 @@ package Minions
          _loc2_ = Singleton.staticData.m_baseTalentTreesList.Worm_earth();
          _loc1_.SetTalentTree(1,_loc2_);
          _loc2_ = Singleton.staticData.m_baseTalentTreesList.Worm_normal();
-         _loc1_.SetTalentTree(2,_loc2_);
-      }
-      
-      private function CreateTestingMinion() : void
-      {
-         var _loc1_:BaseMinion = null;
-         var _loc2_:MinionTalentTree = null;
-         var _loc3_:int = 0;
-         _loc1_ = this.CM(MinionDexID.DEX_ID_testing_minion,"Test Minion","earthBear2",100,100,100,100,100,MinionType.TYPE_FIRE,MinionType.TYPE_EARTH);
-         _loc1_.m_minionIconPositioningX = 0;
-         _loc1_.m_minionIconPositioningY = 0;
-         _loc1_.m_expGainRate = 1;
-         _loc1_.m_numberOfGems = 3;
-         _loc3_ = 0;
-         while(_loc3_ < 5)
-         {
-            _loc1_.AddStartingMove(MinionMoveID.mystic_ice_t1 + _loc3_);
-            _loc3_++;
-         }
-         _loc1_.AddStartingMove(MinionMoveID.burn_t1);
-         _loc1_.SetSpeacilizaionMoves(MinionMoveID.fire_bash_t1,MinionMoveID.taunt_t2,MinionMoveID.crush_t1);
-         _loc2_ = Singleton.staticData.m_baseTalentTreesList.FireBear_fire();
-         _loc1_.SetTalentTree(0,_loc2_);
-         _loc2_ = Singleton.staticData.m_baseTalentTreesList.FireBear_guard();
-         _loc1_.SetTalentTree(1,_loc2_);
-         _loc2_ = Singleton.staticData.m_baseTalentTreesList.FireBear_normal();
          _loc1_.SetTalentTree(2,_loc2_);
       }
    }

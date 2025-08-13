@@ -132,7 +132,7 @@ package PresistentData
       public var m_all_mods:Vector.<String>;
       
       public var m_all_minion_mods:Vector.<String>;
-
+      
       public var m_all_non_min_mods:Vector.<String>;
       
       public var m_TOTAL_MINIONS:int;
@@ -159,12 +159,18 @@ package PresistentData
          this.SetupTheEnemyStatBonuses();
          trace("Creating index of all installed mods");
          this.m_all_minion_mods = new Vector.<String>();
-         this.m_all_minion_mods.push("dirtFish"); //add minion mods here
+         this.m_all_minion_mods.push("dirtFish");
+         this.m_all_minion_mods.push("BMod 1","BMod 2","BMod 3");
+         trace("All known minion mods:");
+         for each(var mod in this.m_all_minion_mods)
+         {
+            trace(" - " + mod);
+         }
          this.m_all_mods = new Vector.<String>();
          this.m_all_non_min_mods = new Vector.<String>();
-         //this.m_all_non_min_mods.push() //add non-minion mods here
-         this.m_all_mods = this.m_all_minion_mods.concat(this.m_all_non_min_mods)
-         this.initDexID = 105; //first free slot
+         this.m_all_mods = this.m_all_minion_mods.concat(this.m_all_non_min_mods);
+         this.initDexID = 102;
+         trace("Finished it");
       }
       
       public function CreateObjectsAfterDynamicData() : void
@@ -177,23 +183,28 @@ package PresistentData
          CreateDexIndex(param1);
          this.m_baseMinionsList = new AllMinionsContainer();
          this.SetupTheEggeryInfo();
+         Singleton.utility.m_screenControllers.m_topDownScreen.LoadSprites(); //need to load the sprites AFTER DexIndex, as part of the Minion-Pedia
+         Singleton.utility.m_screenControllers.m_topDownScreen.m_gemShop.CreateNewGems();
+         Singleton.dynamicData.SetNewReturnToOnDeathPoint();
       }
       
       public function CreateDexIndex(param1:Object) : void
       {
          this.ModToDexID = new Dictionary();
-         for(var k in param1)
+         for(var k in this.m_all_minion_mods)
          {
-            var modState:Boolean = Boolean(param1[k]);
-            var modName:String = k;
-            if((this.m_all_minion_mods.indexOf(modName) != -1) && modState)
+            var modName:String = this.m_all_minion_mods[k];
+            var modState:Boolean = Boolean(param1[modName]);
+            trace("Viewing " + modName+" with the state of "+String(modState));
+            if(modState)
             {
                ModToDexID[modName] = this.initDexID;
-               //throw new Error("'" + modName + "' has been given the DexID of " + String(ModToDexID[modName]));
-               this.initDexID++;
+               trace("\'" + modName + "\' has been given the DexID of " + String(ModToDexID[modName]));
+               ++this.initDexID;
             }
          }
          this.m_TOTAL_MINIONS = this.initDexID;
+         trace("ModToDexID is created successfully!");
       }
       
       private function SetupTheTrainerInfo() : void
