@@ -1319,6 +1319,7 @@ package PresistentData
       
       public function SaveAllData(param1:int) : void
       {
+         trace("Saving data for slot: " + param1);
          var _loc5_:int = 0;
          this.m_sharedObject = SharedObject.getLocal("TCrpgSaveSlot" + param1);
          this.SaveValue("m_topDownCharPositionX");
@@ -1409,7 +1410,16 @@ package PresistentData
          {
             if(this.m_ownedMinions[_loc2_] != null)
             {
-               this.m_ownedMinions[_loc2_].SaveMinionAtSlot(_loc2_);
+               this.m_ownedMinions[_loc2_].SaveMinionAtSlot(_loc2_); //always save the minion data: splits by DexID
+               if(this.m_ownedMinions[_loc2_].ModName!="Vanilla") //if non-vanilla: using ModName attribute
+               {
+                  trace("Saving data for minion: " + this.m_ownedMinions[_loc2_].ModName);
+                  Singleton.dynamicData.m_sharedObject.data["minion" + _loc2_ + "ModName"] = this.m_ownedMinions[_loc2_].ModName; //Save the modname
+               }
+               else //if vanilla minion
+               {
+                  Singleton.dynamicData.m_sharedObject.data["minion" + _loc2_ + "dexID"] = this.m_ownedMinions[_loc2_].m_minionDexID; //save the DexID
+               }
             }
             else
             {
@@ -1558,15 +1568,22 @@ package PresistentData
          }
       }
       
-      private function LoadMinions() : void
+      private function LoadMinions() : void //Loads the minion data
       {
          this.m_ownedMinions = new Vector.<OwnedMinion>(200);
          var _loc1_:int = 0;
          while(_loc1_ < this.m_ownedMinions.length)
          {
-            if(this.m_sharedObject.data["minion" + _loc1_] != null && Boolean(this.m_sharedObject.data["minion" + _loc1_]))
+            if(this.m_sharedObject.data["minion" + _loc1_] != null && Boolean(this.m_sharedObject.data["minion" + _loc1_])) //if the minion exists and data exists for it
             {
-               this.m_ownedMinions[_loc1_] = new OwnedMinion(Singleton.dynamicData.m_sharedObject.data["minion" + _loc1_ + "dexID"]);
+               if(String("minion" + _loc1_ + "ModName") in this.m_sharedObject.data) //if the modname exists: won't exist with vanilla
+               {
+                  this.m_ownedMinions[_loc1_] = new OwnedMinion(Singleton.staticData.ModToDexID[Singleton.dynamicData.m_sharedObject.data["minion" + _loc1_ + "ModName"]]); //creates a new ownedMinion by converting the ModName into a DexID
+               }
+               else //otherwise, use the normal DexID as needed
+               {
+                  this.m_ownedMinions[_loc1_] = new OwnedMinion(Singleton.dynamicData.m_sharedObject.data["minion" + _loc1_ + "dexID"]);
+               }
                this.m_ownedMinions[_loc1_].CreateMinionFromSlot(_loc1_);
             }
             _loc1_++;

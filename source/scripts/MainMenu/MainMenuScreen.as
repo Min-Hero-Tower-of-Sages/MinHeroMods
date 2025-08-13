@@ -841,7 +841,7 @@ package MainMenu
          _loc1_.m_currentExp += 350;
          _loc1_.CalculateCurrStats();
          _loc1_.ReFillHealthAndEnergy();
-         _loc1_ = new OwnedMinion(Singleton.staticData.ModToDexID["dirtFish"]); //this don't
+         _loc1_ = new OwnedMinion(Singleton.staticData.ModToDexID["dirtFish"]); //this don't be normalsies
          Singleton.dynamicData.AddToOwnedMinions(_loc1_);
          _loc1_.SetLevel(5);
          _loc1_.m_currentExp += 300;

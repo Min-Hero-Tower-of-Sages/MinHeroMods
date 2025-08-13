@@ -102,8 +102,10 @@ package Minions
       public var m_currCharge:int;
 
       public var socketManager:SocketManager;
+
+      public var ModName:String = "Vanilla"; //for identifying if a minion belongs to a mod without reliancy on dexID
       
-      public function OwnedMinion(param1:int, param2:Boolean = true)
+      public function OwnedMinion(param1:int, param2:Boolean = true) //param1 is dexID
       {
          super();
          this.m_minionDexID = param1;
@@ -111,6 +113,10 @@ package Minions
          this.m_currentExp = 1;
          this.m_isExtraBattleModMinion = false;
          this.m_minionName = Singleton.staticData.GetBaseMinion(this.m_minionDexID).m_baseMinionName;
+         if(param1>101&&this.m_minionName.indexOf("BMod")!=-1) //if our minion is a mod (due to excessive dexID) but not a BMod
+         {
+            this.ModName = Singleton.staticData.GetBaseMinion(this.m_minionDexID).m_minionBattleSprite; //use the battle sprite as the mod name
+         }
          this.m_IVs = new Vector.<int>(5);
          this._minionID = Singleton.dynamicData.GetNextSettingMinionID();
          this._allMoves = new Vector.<int>();
@@ -1316,7 +1322,7 @@ package Minions
       public function SaveMinionAtSlot(param1:int) : void
       {
          Singleton.dynamicData.m_sharedObject.data["minion" + param1] = true;
-         Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "dexID"] = this.m_minionDexID;
+         //Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "dexID"] = this.m_minionDexID; //implemented externally
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "name"] = this.m_minionName;
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "exp"] = this.m_currentExp;
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "statBonus"] = this.m_statBonus;
