@@ -156,7 +156,7 @@ package TopDown.Menus.MinionPedia
          this.m_minionSelectMask.graphics.endFill();
          _loc1_.addChild(this.m_minionSelectMask);
          this.m_minionSelectHolder.mask = this.m_minionSelectMask;
-         trace("Initialising MinionPedia Menu with " + String(Singleton.staticData.m_TOTAL_MINIONS - 3) +" minions");
+         trace("Initialising MinionPedia Menu with " + String(Singleton.staticData.m_TOTAL_MINIONS - 3) +" \'real\' minions");
          this.m_minionsSelectObjects = new Vector.<MinionPediaMinionSelect>(Singleton.staticData.m_TOTAL_MINIONS - 3);
          var _loc3_:int = 0;
          while(_loc3_ < this.m_minionsSelectObjects.length)

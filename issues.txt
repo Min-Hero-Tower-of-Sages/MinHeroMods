@@ -2,12 +2,13 @@ All the issues that currently plague the SWF will be detailed here:
 
 
 * "ArgumentError: Error #2025: The supplied DisplayObject must be a child of the caller."
-  * When starting a second save
+  * When using "Skip" button before fading to text intro
   * From activation of TopDownMovementScreen
   * Caused by m_roomBounds not being present in m_bottomVisualLayer of m_topDownMovementScreen
   * TO FIX: research how the hail does the roomBounds work, as there must be some kind of triggering thing that got missed....
 
-
+* All minions visible + appear to be owned in Minionpedia for a new save file
+  * Seems to be caused by forced "True" defaulting during creation of the this.m_minionsOwned, this.m_minionsSeen of DynamicData
 
 
 

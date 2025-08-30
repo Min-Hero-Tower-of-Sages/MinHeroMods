@@ -115,7 +115,7 @@ package Minions
          this.m_minionName = Singleton.staticData.GetBaseMinion(this.m_minionDexID).m_baseMinionName;
          if(param1>101) //if our minion is a mod (due to excessive dexID)
          {
-            this.ModName = Singleton.staticData.GetBaseMinion(this.m_minionDexID).m_baseMinionName; //use the minion base name
+            this.ModName = Singleton.staticData.GetBaseMinion(this.m_minionDexID).m_minionBattleSprite; //use the minion battle sprite, duals for codename
          }
          this.m_IVs = new Vector.<int>(5);
          this._minionID = Singleton.dynamicData.GetNextSettingMinionID();

@@ -1529,7 +1529,7 @@ package PresistentData
             _loc6_ = 0;
             while(_loc6_ < Singleton.staticData.m_all_mods.length)
             {
-               this.SetInitialValue("m_isMod",new Array(true,Singleton.staticData.m_all_mods[_loc6_]));
+               this.SetInitialValue("m_isMod",Singleton.staticData.m_all_mods[_loc6_]);
                _loc6_++;
             }
             trace("dynamicData has the following mod configuration:");
@@ -1545,7 +1545,7 @@ package PresistentData
             while(_loc6_ < this.m_minionsOwned.length)
             {
                this.SetInitialValue("m_minionsOwned",false,_loc6_);
-               this.SetInitialValue("m_minionsSeen",false,_loc6_);
+               this.SetInitialValue("m_minionsSeen",false,_loc6_); //this defaults them to True
                _loc6_++;
             }
             this.LoadMinions();
@@ -1578,9 +1578,9 @@ package PresistentData
             {
                if(String("minion" + _loc1_ + "ModName") in this.m_sharedObject.data) //if the modname exists: won't exist with vanilla
                {
-                  trace("Loading modded minion: " + this.m_sharedObject.data["minion" + _loc1_ + "ModName"]);
-                  this.m_ownedMinions[_loc1_] = new OwnedMinion(Singleton.staticData.ModToDexID[Singleton.dynamicData.m_sharedObject.data["minion" + _loc1_ + "ModName"]]); //creates a new ownedMinion by converting the ModName into a DexID
-                  this.m_ownedMinions[_loc1_].CreateMinionFromSlot(_loc1_,Singleton.staticData.ModToDexID[Singleton.dynamicData.m_sharedObject.data["minion" + _loc1_ + "ModName"]]); //then makes sure the DexID is right by using our custom one
+                  trace("Loading modded minion: " + this.m_sharedObject.data["minion" + _loc1_ + "ModName"] + " with virtual DexID of "+ Singleton.staticData.ModToDexID[this.m_sharedObject.data["minion" + _loc1_ + "ModName"]]);
+                  this.m_ownedMinions[_loc1_] = new OwnedMinion(Singleton.staticData.ModToDexID[this.m_sharedObject.data["minion" + _loc1_ + "ModName"]]); //creates a new ownedMinion by converting the ModName into a DexID
+                  this.m_ownedMinions[_loc1_].CreateMinionFromSlot(_loc1_,Singleton.staticData.ModToDexID[this.m_sharedObject.data["minion" + _loc1_ + "ModName"]]); //then makes sure the DexID is right by using our custom one
                }
                else //otherwise, use the normal DexID as needed
                {
@@ -1618,13 +1618,22 @@ package PresistentData
       {
          if(param1 == "m_isMod")
          {
-            if(this.m_sharedObject.data["m_isMod_" + String(param2[1])] != null)
+            if(param2=="BMod 1"||param2=="BMod 2"||param2=="BMod 3") //if said mod is a BMod
             {
-               this["m_isMod"][String(param2[1])] = this.m_sharedObject.data["m_isMod_" + String(param2[1])];
+               this["m_isMod"][param2] = true; //defaults to True, always (it's a BMod)
             }
-            else
+            else //otherwise, follow standard mod config procedure
             {
-               this["m_isMod"][String(param2[1])] = true; //default to false
+               if(this.m_sharedObject.data["m_isMod_" + param2] != null)
+               {
+                  this["m_isMod"][param2] = this.m_sharedObject.data["m_isMod_" + param2];
+                  trace("Detected mod config for " + param2 + ", using " + this.m_sharedObject.data["m_isMod_" + param2])
+               }
+               else
+               {
+                  trace("Using default mod config for " + param2 + ", using false")
+                  this["m_isMod"][param2] = false; //default to false
+               }
             }
          }
          else if(param3 == -99)

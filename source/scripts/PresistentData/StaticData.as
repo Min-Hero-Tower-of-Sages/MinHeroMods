@@ -199,8 +199,8 @@ package PresistentData
             trace("Viewing " + modName+" with the state of "+String(modState));
             if(modState)
             {
-               ModToDexID[modName] = this.initDexID;
-               trace("\'" + modName + "\' has been given the DexID of " + String(ModToDexID[modName]));
+               this.ModToDexID[modName] = this.initDexID;
+               trace("\'" + modName + "\' has been given the DexID of " + String(this.ModToDexID[modName]));
                ++this.initDexID;
             }
          }
@@ -371,7 +371,8 @@ package PresistentData
          this.AddMinionToEggery(MinionDexID.DEX_ID_holyMantris_1,30,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_tRex_1,20,_loc2_);
          _loc2_ = 4;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_testing_minion,60,_loc2_);
+         // changing all "MinionDexID. DEX_ID_testing_minion" to BMod 1 ID
+         this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
          _loc2_ = 5;
          this.AddMinionToEggery(MinionDexID.DEX_ID_tikiMonkey_2,40,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_ground_plant_2,40,_loc2_);
@@ -389,7 +390,7 @@ package PresistentData
          this.AddMinionToEggery(MinionDexID.DEX_ID_raptor_2,30,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_robobull_1,20,_loc2_);
          _loc2_ = 9;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_testing_minion,60,_loc2_);
+         this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
          _loc2_ = 10;
          this.AddMinionToEggery(MinionDexID.DEX_ID_Goo_2,50,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_Scorpion_2,50,_loc2_);
@@ -406,7 +407,7 @@ package PresistentData
          this.AddMinionToEggery(MinionDexID.DEX_ID_RoboShark_1,30,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_DC2Guy_1,20,_loc2_);
          _loc2_ = 14;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_testing_minion,60,_loc2_);
+         this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
          _loc2_ = 15;
          this.AddMinionToEggery(MinionDexID.DEX_ID_EvilEye_2,40,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_Crow_2,35,_loc2_);
@@ -428,7 +429,7 @@ package PresistentData
          this.AddMinionToEggery(MinionDexID.DEX_ID_BatDemon_1,20,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_UndeadEel_1,20,_loc2_);
          _loc2_ = 19;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_testing_minion,60,_loc2_);
+         this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
          _loc2_ = 20;
          this.AddMinionToEggery(MinionDexID.DEX_ID_demonic_cat_1,5,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_demonic_cat_2,15,_loc2_);
@@ -478,7 +479,7 @@ package PresistentData
          this.AddMinionToEggery(MinionDexID.DEX_ID_raptor_2,5,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_robobull_1,5,_loc2_);
          _loc2_ = 24;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_testing_minion,60,_loc2_);
+         this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
          _loc2_ = 25;
          this.AddMinionToEggery(MinionDexID.DEX_ID_DogEel_1,5,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_DogEel_2,25,_loc2_);
@@ -515,9 +516,9 @@ package PresistentData
          this.AddMinionToEggery(MinionDexID.DEX_ID_BatDemon_1,5,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_UndeadEel_1,5,_loc2_);
          _loc2_ = 29;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_testing_minion,60,_loc2_);
+         this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
          _loc2_ = 30;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_testing_minion,60,_loc2_);
+         this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
       }
       
       private function AddMinionToEggery(param1:int, param2:int, param3:int) : void

@@ -539,7 +539,7 @@ package MainMenu
          this.m_currState = MainMenuStates.MAIN_MENU_TITLE_SCREEN;
       }
       
-      private function SkipButtonPressed(param1:MouseEvent) : void  //tutorial creation beyond skip
+      private function SkipButtonPressed(param1:MouseEvent) : void  //tutorial creation beyond skip. Seems to funky up stuff
       {
          TweenLite.killTweensOf(this); 
          Singleton.dynamicData.LoadData(Singleton.dynamicData.m_saveSlot,true); //load data
@@ -845,7 +845,7 @@ package MainMenu
          _loc1_.m_currentExp += 350;
          _loc1_.CalculateCurrStats();
          _loc1_.ReFillHealthAndEnergy();
-         _loc1_ = new OwnedMinion(Singleton.staticData.ModToDexID["dirtFish"]); //this don't be normalsies
+         _loc1_ = new OwnedMinion(MinionDexID.DEX_ID_Tiger_1); //change to DexID of any adding test minion
          Singleton.dynamicData.AddToOwnedMinions(_loc1_);
          _loc1_.SetLevel(5);
          _loc1_.m_currentExp += 300;
