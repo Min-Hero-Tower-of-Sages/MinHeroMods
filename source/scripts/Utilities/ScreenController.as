@@ -63,7 +63,7 @@ package Utilities
          Singleton.utility.m_bonusItemPopup.LoadSprites();
       }
       
-      public function SetSceneTo(param1:int, param2:Boolean = true, param3:Number = 0.5, param4:Boolean = true, isFirstTime:Boolean=false) : void
+      public function SetSceneTo(param1:int, param2:Boolean = true, param3:Number = 0.5, param4:Boolean = true) : void
       {
          var _loc5_:TimelineLite = null;
          Singleton.dynamicData.m_gameState = GameState.TRANSITIONING;
@@ -73,6 +73,7 @@ package Utilities
          switch(this.m_gameStateToGoto)
          {
             case GameState.MAIN_MENU:
+               trace("Going to main menu...")
                Singleton.utility.m_stage.addChild(this.m_mainMenuScreen);
                this.m_mainMenuScreen.visible = false;
                this.m_mainMenuScreen.StartActivate();
@@ -83,9 +84,10 @@ package Utilities
                this.m_battleScreen.StartActivate();
                break;
             case GameState.TOP_DOWN_SCREEN:
+               trace("Going to top down screen...")
                Singleton.utility.m_stage.addChild(this.m_topDownScreen);
                this.m_topDownScreen.visible = false;
-               this.m_topDownScreen.StartActivate(isFirstTime);
+               this.m_topDownScreen.StartActivate();
                break;
             case GameState.LEVEL_SELECT_SCREEN:
                Singleton.utility.m_stage.addChild(this.m_levelSelectScreen);

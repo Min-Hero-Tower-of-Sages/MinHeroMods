@@ -14,7 +14,7 @@ package SharedObjects
       {
       }
       
-      public function StartActivate(isFirstTime:Boolean=false) : void
+      public function StartActivate() : void
       {
       }
       

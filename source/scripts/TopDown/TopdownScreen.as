@@ -57,10 +57,10 @@ package TopDown
          addChild(this.m_eggeryPartySwapMenu);
       }
       
-      override public function StartActivate(isFirstTime:Boolean=false) : void
+      override public function StartActivate() : void
       {
          super.StartActivate();
-         this.m_topDownMovementScreen.StartActivate(isFirstTime);
+         this.m_topDownMovementScreen.StartActivate();
       }
       
       override public function FinishActivate() : void

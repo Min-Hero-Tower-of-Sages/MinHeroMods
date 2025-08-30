@@ -1578,13 +1578,15 @@ package PresistentData
             {
                if(String("minion" + _loc1_ + "ModName") in this.m_sharedObject.data) //if the modname exists: won't exist with vanilla
                {
+                  trace("Loading modded minion: " + this.m_sharedObject.data["minion" + _loc1_ + "ModName"]);
                   this.m_ownedMinions[_loc1_] = new OwnedMinion(Singleton.staticData.ModToDexID[Singleton.dynamicData.m_sharedObject.data["minion" + _loc1_ + "ModName"]]); //creates a new ownedMinion by converting the ModName into a DexID
+                  this.m_ownedMinions[_loc1_].CreateMinionFromSlot(_loc1_,Singleton.staticData.ModToDexID[Singleton.dynamicData.m_sharedObject.data["minion" + _loc1_ + "ModName"]]); //then makes sure the DexID is right by using our custom one
                }
                else //otherwise, use the normal DexID as needed
                {
                   this.m_ownedMinions[_loc1_] = new OwnedMinion(Singleton.dynamicData.m_sharedObject.data["minion" + _loc1_ + "dexID"]);
-               }
-               this.m_ownedMinions[_loc1_].CreateMinionFromSlot(_loc1_);
+                  this.m_ownedMinions[_loc1_].CreateMinionFromSlot(_loc1_,1);
+               } 
             }
             _loc1_++;
          }

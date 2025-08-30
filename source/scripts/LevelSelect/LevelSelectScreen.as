@@ -193,7 +193,7 @@ package LevelSelect
          return _loc1_;
       }
       
-      override public function StartActivate(isFirstTime:Boolean=false) : void
+      override public function StartActivate() : void
       {
          var _loc2_:int = 0;
          super.StartActivate();

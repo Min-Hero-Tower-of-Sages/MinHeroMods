@@ -172,7 +172,7 @@ package TopDown.Levels
             this.m_allObjects[_loc1_].Cleanup();
             _loc1_++;
          }
-         Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer.removeChild(this.m_roomBounds);
+         Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer.removeChild(this.m_roomBounds); //this is the one that fails
       }
       
       private function LoadLevelFromXMLObject() : void

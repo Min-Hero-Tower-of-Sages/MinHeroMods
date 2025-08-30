@@ -126,7 +126,7 @@ package Minions
          this.BattleMod_stage1();
          this.BattleMod_stage2();
          this.BattleMod_stage3();
-         trace("Completed!")
+         trace("Completed! "+ this.m_allMinions.length + " minions created.");
       }
       
       private function CM(param1:int, param2:String, param3:String, param4:int, param5:int, param6:int, param7:int, param8:int, param9:int, param10:int = 0) : BaseMinion
@@ -155,7 +155,7 @@ package Minions
       {
          var _loc2_:MinionTalentTree = null;
          var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["dirtFish"],"Zanyu","dirtFish",80,60,85,15,55,MinionType.TYPE_FLYING,MinionType.TYPE_EARTH);
-         trace("Created Zanyu at the index " + String(Singleton.staticData.ModToDexID["dirtFish"]));
+         trace("Created Zanyu at the index " + String(Singleton.staticData.ModToDexID["dirtFish"]) + " with BattleSprite " + _loc1_.m_minionBattleSprite);
          _loc1_.m_minionIconPositioningX = -5;
          _loc1_.m_minionIconPositioningY = -60;
          _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD;

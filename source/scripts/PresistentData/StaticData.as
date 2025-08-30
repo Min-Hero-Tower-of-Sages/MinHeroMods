@@ -191,6 +191,7 @@ package PresistentData
       public function CreateDexIndex(param1:Object) : void
       {
          this.ModToDexID = new Dictionary();
+         this.initDexID = 102;
          for(var k in this.m_all_minion_mods)
          {
             var modName:String = this.m_all_minion_mods[k];

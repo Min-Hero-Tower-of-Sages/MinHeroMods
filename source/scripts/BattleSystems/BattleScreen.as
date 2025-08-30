@@ -162,7 +162,7 @@ package BattleSystems
          Singleton.dynamicData.m_isSoundOn = this.m_muteSoundButton.m_isToggleOn;
       }
       
-      override public function StartActivate(isFirstTime:Boolean=false) : void
+      override public function StartActivate() : void
       {
          super.StartActivate();
          this.m_muteSoundButton.m_isToggleOn = Singleton.dynamicData.m_isSoundOn;

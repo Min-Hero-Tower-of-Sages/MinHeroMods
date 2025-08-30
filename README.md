@@ -16,6 +16,7 @@ This is **NOT backwards-compatiable**, so if you create a save that contains Zan
 * Generates DexID for new minions
 * Multiplayer code added (UNTESTED)
 * Rearrangement of features to accommodate for modloader system
+* Saves modded minions by ModName instead of DexID
 
 ### Content:
 
@@ -28,8 +29,8 @@ This is **NOT backwards-compatiable**, so if you create a save that contains Zan
 Core (things that are present across all versions)
 * Fix the spelling mistakes in the code. It's so easy to do, we might as well
 * Add mod managing system (square_nine)
-	* Make the save/load for new minions based on other form of ID (dynamic DexID)
-
+	* Make the loading system for new minions in save file work
+	* Add GUI/Menu for toggling mods: delete minions as appropiate
  
 Multi (things just for the multiplayer as that's going to enter here RAAH)
 * Check BattleSystem for socket entry point

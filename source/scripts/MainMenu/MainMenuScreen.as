@@ -359,7 +359,7 @@ package MainMenu
          this.m_currState = MainMenuStates.MAIN_MENU_ANIMATING;
       }
       
-      override public function StartActivate(isFirstTime:Boolean=false) : void
+      override public function StartActivate() : void
       {
          super.StartActivate();
          Singleton.dynamicData.LoadInitialData();
@@ -408,21 +408,25 @@ package MainMenu
          this.m_sponsorTwitter.x = 639;
          this.m_sponsorTwitter.y = 473;
          this.m_sponsorTwitter.alpha = 0;
+         trace("Bringing in state");
          this.m_currState = MainMenuStates.MAIN_MENU_BRINGING_IN;
          Singleton.utility.m_soundController.ChangeMusicTrack(BackgroundMusicTracks.MUSIC_TITLE);
          Singleton.utility.m_soundController.FadeCurrentMusic(1,3);
+         trace("Final stuff");
       }
       
       override public function FinishActivate() : void
       {
          super.FinishActivate();
          this.TurnOffAllTheAlphasBeforeAnimation();
+         trace("Bringing in start animation");
          this.StartBringInAnimation_Part1();
       }
       
       override public function DeActivate() : void
       {
          super.DeActivate();
+         trace("Deactivating...")
          removeChild(this.m_sponsorTwitter);
          this.m_sponsorTwitter.unloadAndStop();
          removeChild(this.m_sponsorFacebook);
@@ -518,7 +522,7 @@ package MainMenu
          _loc3_.append(new TweenLite(this.m_hostGamesButton,0.8,{"alpha":1}));
          _loc3_ = new TimelineLite();
          _loc3_.append(new TweenLite(this.m_tcGamesButton,2.7,{}));
-         _loc3_.append(new TweenLite(this.m_tcGamesButton,0.8,{  //funnily enough, this determines the "FinishBringingInAnimation"
+         _loc3_.append(new TweenLite(this.m_tcGamesButton,0.8,{  
             "alpha":1,
             "onComplete":this.FinishBringInAnimation
          }));
@@ -540,7 +544,7 @@ package MainMenu
          TweenLite.killTweensOf(this); 
          Singleton.dynamicData.LoadData(Singleton.dynamicData.m_saveSlot,true); //load data
          this.AddInitialMinions(); //initial minions
-         Singleton.utility.m_screenControllers.SetSceneTo(GameState.TOP_DOWN_SCREEN,true,0.5,isFirstTime=true);
+         Singleton.utility.m_screenControllers.SetSceneTo(GameState.TOP_DOWN_SCREEN,true,0.5);
          Singleton.utility.m_soundController.FadeCurrentMusic(0.1,0.8);
       }
       
@@ -549,7 +553,7 @@ package MainMenu
          TweenLite.to(this.m_skipIntroButton,0.5,{"alpha":1});
       }
       
-      private function PlayButtonPressed(param1:MouseEvent) : void
+      private function PlayButtonPressed(param1:MouseEvent) : void //loads the save slots
       {
          TweenLite.to(this.m_playButton,0.7,{
             "y":"-90",

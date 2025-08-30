@@ -113,9 +113,9 @@ package Minions
          this.m_currentExp = 1;
          this.m_isExtraBattleModMinion = false;
          this.m_minionName = Singleton.staticData.GetBaseMinion(this.m_minionDexID).m_baseMinionName;
-         if(param1>101&&this.m_minionName.indexOf("BMod")!=-1) //if our minion is a mod (due to excessive dexID) but not a BMod
+         if(param1>101) //if our minion is a mod (due to excessive dexID)
          {
-            this.ModName = Singleton.staticData.GetBaseMinion(this.m_minionDexID).m_minionBattleSprite; //use the battle sprite as the mod name
+            this.ModName = Singleton.staticData.GetBaseMinion(this.m_minionDexID).m_baseMinionName; //use the minion base name
          }
          this.m_IVs = new Vector.<int>(5);
          this._minionID = Singleton.dynamicData.GetNextSettingMinionID();
@@ -1348,9 +1348,16 @@ package Minions
          }
       }
       
-      public function CreateMinionFromSlot(param1:int) : void
+      public function CreateMinionFromSlot(param1:int,param2:int) : void //this rights the values of base minion loading. Added param2 as a flag for whether the minion is a mod
       {
-         this.m_minionDexID = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "dexID"]+3;
+         if(param2 != 1)
+         {
+            this.m_minionDexID = param2;   //uses our special ModToDexID (passed in as param2) 
+         }
+         else
+         {
+            this.m_minionDexID = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "dexID"];
+         }
          this.m_minionName = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "name"];
          this.m_currentExp = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "exp"];
          this.m_statBonus = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "statBonus"];

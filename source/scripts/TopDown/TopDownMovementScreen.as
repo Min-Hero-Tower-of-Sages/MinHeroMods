@@ -327,13 +327,10 @@ package TopDown
          Singleton.dynamicData.m_isSoundOn = this.m_muteSoundButton.m_isToggleOn;
       }
       
-      public function StartActivate(isFirstTime:Boolean=false) : void //added param
+      public function StartActivate() : void
       {
          Singleton.staticData.PreBuildRoomsForFloor(Singleton.dynamicData.m_currFloorOfTower);
-         if(!isFirstTime) //now it'll not be the same
-         {
-            this.RemoveOldRoomCreateNewRooom();
-         }
+         this.RemoveOldRoomCreateNewRooom();
          this.m_prevLevel = this.m_currLevel;
          Singleton.dynamicData.CalculateTotatNumberOfAvailbleStars();
          Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_miniMap.CreateMap();
