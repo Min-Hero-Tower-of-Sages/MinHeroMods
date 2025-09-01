@@ -119,7 +119,7 @@ package Minions
          this.Titan1_stage1();
          this.Titan2_stage1();
          trace("All vanilla minions created...")
-         if(Singleton.dynamicData.getModStatusFromName("dirtFish")) //add each mod creation like so. This will basically mirror the DexID creation process, such that the index to access this will be the correct one
+         if(Singleton.dynamicData.m_isMod["dirtFish"]) //add each mod creation like so. This will basically mirror the DexID creation process, such that the index to access this will be the correct one
          {
             this.dirtFish_stage1();
          }
@@ -155,7 +155,7 @@ package Minions
       {
          var _loc2_:MinionTalentTree = null;
          var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["dirtFish"],"Zanyu","dirtFish",80,60,85,15,55,MinionType.TYPE_FLYING,MinionType.TYPE_EARTH);
-         trace("Created Zanyu at the index " + String(Singleton.staticData.ModToDexID["dirtFish"]) + " with BattleSprite " + _loc1_.m_minionBattleSprite);
+         trace("Created Zanyu at the index " + String(Singleton.staticData.ModToDexID["dirtFish"]));
          _loc1_.m_minionIconPositioningX = -5;
          _loc1_.m_minionIconPositioningY = -60;
          _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD;

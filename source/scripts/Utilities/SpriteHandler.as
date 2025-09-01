@@ -2666,6 +2666,8 @@ package Utilities
       
       private static var dirtFish:Class = SpriteHandler_dirtFish;
       
+      private static var mainMenu_modMenuBackground:* = SpriteHandler_mainMenu_modMenuBackground;
+      
       private var MAIN_FONT:Class = SpriteHandler_MAIN_FONT;
       
       private var m_currSSIndex:Array;

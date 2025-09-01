@@ -1,0 +1,21 @@
+Temporary notes:
+
+CREATING MOD MENU FUNCTIONS
+
+Code to make on/off toggles in SettingsMenu.as in "LoadSprites"
+
+Look into ToggleButton.as for how it behaves (and thus, TCButton.as)
+
+
+
+
+Modify ModMenu to add name of your Mod
+(could've made this a StaticData feature but with only 1 use, does it matter? Could possible make a matching function so you can see what's a mod and what's not when looking in minion-pedia)
+
+
+Music button: X 4 Y 6
+Sound button: X 36 Y 5
+
+Character Creation Screen Propotions:
+
+Main window: X 108 Y 139 (in MainMenuScreen l. 324-5)

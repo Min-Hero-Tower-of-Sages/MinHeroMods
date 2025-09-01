@@ -79,6 +79,8 @@ package MainMenu
       public var m_saveSlots:Vector.<FileSelectIcon>;
       
       public var m_charCreationPopup:CharCreationPopup;
+
+      public var m_modMenu:ModMenu;
       
       public var m_muteMusicButton:ToggleButton;
       
@@ -93,7 +95,7 @@ package MainMenu
       public var m_textSet4:Vector.<TextField>;
       
       public var m_skipIntroButton:TCButton;
-      
+
       public function MainMenuScreen()
       {
          super();
@@ -321,9 +323,17 @@ package MainMenu
          }
          this.m_charCreationPopup = new CharCreationPopup();
          this.m_charCreationPopup.LoadSprites();
-         this.m_charCreationPopup.x = 108;
+         this.m_charCreationPopup.x = 20; //changed to 20 from 108
          this.m_charCreationPopup.y = 139;
          addChild(this.m_charCreationPopup);
+         //INSERTING CUSTOM MOD CONFIG MENU
+         this.m_modMenu = new ModMenu(); //new there's a funky script for it
+         this.m_modMenu.LoadSprites();
+         this.m_modMenu.x = 500;
+         this.m_modMenu.y = 139;
+         addChild(this.m_modMenu);
+         //END
+
          this.m_creditsScreen = new CreditsScreen();
          this.m_creditsScreen.LoadSprites();
          addChild(this.m_creditsScreen);
@@ -364,6 +374,7 @@ package MainMenu
          super.StartActivate();
          Singleton.dynamicData.LoadInitialData();
          this.m_charCreationPopup.visible = false;
+         this.m_modMenu.visible = false;
          this.m_blackOverlayForButtons.x = 0;
          this.m_blackOverlayForButtons.y = 194;
          this.m_playButton.x = 263;
@@ -666,8 +677,9 @@ package MainMenu
          TweenLite.to(this.m_fullBlackOverlay,0.5,{"alpha":0});
          TweenLite.to(this.m_blackOverlayForButtons,0.5,{"alpha":0});
          TweenLite.to(this.m_charCreationPopup,0.5,{"alpha":0});
+         TweenLite.to(this.m_modMenu,0.5,{"alpha":0});
          TweenLite.to(this.m_titleIcon,0.5,{"alpha":0});
-         this.m_charCreationPopup.ExitOut();
+         this.m_charCreationPopup.ExitOut(); //not needed for ModMenu
          this.m_doorOuterGlow_mask.visible = true;
          this.m_doorOuterGlow.visible = true;
          _loc3_ = new TimelineLite();
@@ -942,8 +954,15 @@ package MainMenu
             "delay":0.5,
             "alpha":1
          });
+         this.m_modMenu.visible = true; //adding mod menu stuff in tandem with charCreationPopup
+         this.m_modMenu.alpha = 0;
+         TweenLite.to(this.m_modMenu,0.9,{
+            "delay":0.5,
+            "alpha":1
+         });
          this.m_currState = MainMenuStates.MAIN_MENU_CHAR_CREATION;
          this.m_charCreationPopup.BringIn();
+         this.m_modMenu.BringIn(); //bring in mods too
       }
       
       public function AnimateOutTheCharSelectionScreen() : void
@@ -976,8 +995,9 @@ package MainMenu
             "alpha":0,
             "onComplete":this.FinishAnimateOutTheCharSelectionScreen
          });
+         TweenLite.to(this.m_modMenu,0.5,{"alpha":0}); //no onComplete needed as that just changes the state
          this.m_currState = MainMenuStates.MAIN_MENU_ANIMATING;
-         this.m_charCreationPopup.ExitOut();
+         this.m_charCreationPopup.ExitOut(); //don't need an exitOut for mods, focus is only for the char creation popup
       }
       
       private function FinishAnimateOutTheCharSelectionScreen() : void
@@ -1040,6 +1060,7 @@ package MainMenu
          else if(this.m_currState == MainMenuStates.MAIN_MENU_CHAR_CREATION)
          {
             this.m_charCreationPopup.Update();
+            this.m_modMenu.Update();
          }
          if(this.m_skipIntroButton.alpha == 1)
          {

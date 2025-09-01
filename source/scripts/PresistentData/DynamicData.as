@@ -470,11 +470,6 @@ package PresistentData
          }
       }
       
-      public function getModStatusFromName(param1:String) : Boolean
-      {
-         return Boolean(this.m_isMod[param1]);
-      }
-      
       public function get m_currRoomOfTower() : int
       {
          return this._currRoomOfTower;
@@ -1430,7 +1425,7 @@ package PresistentData
          var i:int = 0;
          while(i < Singleton.staticData.m_all_mods.length)
          {
-            this.SaveValue("m_isMod",i);
+            this.SaveValue("m_isMod",i); //passing index as SaveValue adjusts that to m_all_mods
             i++;
          }
          this.m_sharedObject.flush();
@@ -1631,8 +1626,8 @@ package PresistentData
                }
                else
                {
-                  trace("Using default mod config for " + param2 + ", using false")
-                  this["m_isMod"][param2] = false; //default to false
+                  trace("FIRST TIME CREATION!")
+                  trace("Using mod menu mod config for " + param2 + ", using "+ this.m_isMod[param2])
                }
             }
          }

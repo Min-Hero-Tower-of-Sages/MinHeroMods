@@ -77,7 +77,7 @@ package MainMenu
          this.m_enterNameText.border = true;
          this.m_enterNameText.background = true;
          this.m_enterNameText.backgroundColor = 14474460;
-         this.m_enterNameText.restrict = "0-9 a-z A-Z";
+         this.m_enterNameText.restrict = "0-9 a-z A-Z"; //restricting the possible entrants for name
          this.m_enterNameText.maxChars = 10;
          this.m_enterNameText.text = "Ryder";
          addChild(this.m_enterNameText);
