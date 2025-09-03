@@ -2665,8 +2665,12 @@ package Utilities
       private static var miniMap_eggeryOverlay:Class = SpriteHandler_miniMap_eggeryOverlay;
       
       private static var dirtFish:Class = SpriteHandler_dirtFish;
-      
-      private static var mainMenu_modMenuBackground:* = SpriteHandler_mainMenu_modMenuBackground;
+
+      private static var waterRay1:Class = SpriteHandler_waterRay1;
+
+      private static var waterRay2:Class = SpriteHandler_waterRay2;
+
+      private static var mainMenu_modMenuBackground:Class = SpriteHandler_mainMenu_modMenuBackground;
       
       private var MAIN_FONT:Class = SpriteHandler_MAIN_FONT;
       

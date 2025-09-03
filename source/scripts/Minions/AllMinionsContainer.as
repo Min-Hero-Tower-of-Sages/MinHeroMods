@@ -123,6 +123,11 @@ package Minions
          {
             this.dirtFish_stage1();
          }
+         if(Singleton.dynamicData.m_isMod["waterRay"])
+         {
+            this.waterRay_stage1();
+            this.waterRay_stage2();
+         }
          this.BattleMod_stage1();
          this.BattleMod_stage2();
          this.BattleMod_stage3();
@@ -150,12 +155,53 @@ package Minions
       {
          return this.m_allMinions[param1];
       }
-      
+
+      private function waterRay_stage1() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["waterRay1"],"Stingaray","waterRay1",26,57,60,30,54,MinionType.TYPE_WATER);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_NORMAL;
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 1;
+         _loc1_.m_evolutionLevel = 29;
+         _loc1_.AddStartingMove(MinionMoveID.spark_t1);
+         _loc1_.AddStartingMove(MinionMoveID.water_slam_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.fresh_stream_t1,MinionMoveID.overload_t1,MinionMoveID.reflect_damage_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.RoboShark_Water();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.WaterHorse_Electric();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.JellyFish_Normal();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function waterRay_stage2() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["waterRay2"],"Mantaray","waterRay2",26,57,60,30,54,MinionType.TYPE_WATER,MinionType.TYPE_ENERGY);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD;
+         _loc1_.m_numberOfGems = 3;
+         _loc1_.m_numberOfLockedGems = 0;
+         _loc1_.AddStartingMove(MinionMoveID.spark_t1);
+         _loc1_.AddStartingMove(MinionMoveID.water_slam_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.fresh_stream_t1,MinionMoveID.overload_t1,MinionMoveID.reflect_damage_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.RoboShark_Water();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.WaterHorse_Electric();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.JellyFish_Normal();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
       private function dirtFish_stage1() : void
       {
          var _loc2_:MinionTalentTree = null;
          var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["dirtFish"],"Zanyu","dirtFish",80,60,85,15,55,MinionType.TYPE_FLYING,MinionType.TYPE_EARTH);
-         trace("Created Zanyu at the index " + String(Singleton.staticData.ModToDexID["dirtFish"]));
+         //trace("Created Zanyu at the index " + String(Singleton.staticData.ModToDexID["dirtFish"]));
          _loc1_.m_minionIconPositioningX = -5;
          _loc1_.m_minionIconPositioningY = -60;
          _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD;

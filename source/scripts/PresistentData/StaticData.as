@@ -159,7 +159,7 @@ package PresistentData
          this.SetupTheEnemyStatBonuses();
          trace("Creating index of all installed mods");
          this.m_all_minion_mods = new Vector.<String>();
-         this.m_all_minion_mods.push("dirtFish");
+         this.m_all_minion_mods.push("dirtFish","waterRay1","waterRay2");
          this.m_all_minion_mods.push("BMod 1","BMod 2","BMod 3");
          trace("All known minion mods:");
          for each(var mod in this.m_all_minion_mods)
@@ -364,8 +364,17 @@ package PresistentData
          this.AddMinionToEggery(MinionDexID.DEX_ID_groundMole_1,70,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_groundAttacker_1,30,_loc2_);
          _loc2_ = 2;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_waterSeal_1,60,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_waterBird_1,40,_loc2_);
+         if(Singleton.dynamicData.m_isMod["waterRay1"])
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_waterSeal_1,57.5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_waterBird_1,37.5,_loc2_);
+            this.AddMinionToEggery(this.ModToDexID["waterRay1"],5,_loc2_);
+         }
+         else
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_waterSeal_1,60,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_waterBird_1,40,_loc2_);
+         }
          _loc2_ = 3;
          this.AddMinionToEggery(MinionDexID.DEX_ID_healingHorse_1,50,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_holyMantris_1,30,_loc2_);
@@ -392,8 +401,17 @@ package PresistentData
          _loc2_ = 9;
          this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
          _loc2_ = 10;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_Goo_2,50,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_Scorpion_2,50,_loc2_);
+         if(Singleton.dynamicData.m_isMod["waterRay1"])
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Goo_2,35,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Scorpion_2,35,_loc2_);
+            this.AddMinionToEggery(this.ModToDexID["waterRay1"],30,_loc2_);
+         }
+         else
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Goo_2,50,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Scorpion_2,50,_loc2_);
+         }
          _loc2_ = 11;
          this.AddMinionToEggery(MinionDexID.DEX_ID_DogEel_2,50,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_JellyFish_2,35,_loc2_);
