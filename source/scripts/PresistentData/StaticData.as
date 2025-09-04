@@ -381,7 +381,7 @@ package PresistentData
             this.AddMinionToEggery(MinionDexID.DEX_ID_healingHorse_1,45,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_holyMantris_1,27,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_tRex_1,18,_loc2_);
-            this.AddMinionToEggery(MinionDexID.DEX_ID_holyBirb_1,10,_loc2_);
+            this.AddMinionToEggery(this.ModToDexID["HolyBirb1"],10,_loc2_);
          }
          else
          {
@@ -449,8 +449,8 @@ package PresistentData
             this.AddMinionToEggery(MinionDexID.DEX_ID_PinkBell_1,11,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_FireGhost_1,20,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_HolyStrongGuy_1,11,_loc2_);
-            this.AddMinionToEggery(MinionDexID.DEX_ID_holy_eye_2,14,_loc2_);
-            this.AddMinionToEggery(MinionDexID.DEX_ID_holyBirb_2,11,_loc2_);
+            this.AddMinionToEggery(this.ModToDexID["HolyEye2"],14,_loc2_);
+            this.AddMinionToEggery(this.ModToDexID["holyBirb2"],11,_loc2_);
          }
          else if(Singleton.dynamicData.m_isMod["HolyEye1"])
          {
@@ -460,7 +460,7 @@ package PresistentData
             this.AddMinionToEggery(MinionDexID.DEX_ID_PinkBell_1,13,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_FireGhost_1,20,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_HolyStrongGuy_1,13,_loc2_);
-            this.AddMinionToEggery(MinionDexID.DEX_ID_holy_eye_2,15,_loc2_);
+            this.AddMinionToEggery(this.ModToDexID["HolyEye2"],15,_loc2_);
          }
          else if(Singleton.dynamicData.m_isMod["holyBirb1"])
          {
@@ -470,7 +470,7 @@ package PresistentData
             this.AddMinionToEggery(MinionDexID.DEX_ID_PinkBell_1,15,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_FireGhost_1,25,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_HolyStrongGuy_1,15,_loc2_);
-            this.AddMinionToEggery(MinionDexID.DEX_ID_holyBirb_2,15,_loc2_);
+            this.AddMinionToEggery(this.ModToDexID["holyBirb2"],15,_loc2_);
          }
          else
          {
@@ -531,7 +531,7 @@ package PresistentData
             this.AddMinionToEggery(MinionDexID.DEX_ID_fire_bear_1,4,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_fire_bear_2,14,_loc2_);
             this.AddMinionToEggery(MinionDexID.DEX_ID_tortoise_1,9,_loc2_);
-            this.AddMinionToEggery(MinionDexID.DEX_ID_holy_eye_3,9,_loc2_);
+            this.AddMinionToEggery(this.ModToDexID["HolyEye1"],9,_loc2_);
          }
          else
          {
