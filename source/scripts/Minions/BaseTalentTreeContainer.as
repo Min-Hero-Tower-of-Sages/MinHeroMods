@@ -10,6 +10,31 @@ package Minions
          super();
       }
       
+      public function holyBirb_Flying() : MinionTalentTree
+      {
+         var _loc1_:MinionTalentTree = new MinionTalentTree("Flying");
+         _loc1_.AddMoveToTree(0,0,MinionMoveID.crusade_t1);
+         _loc1_.AddMoveToTree(0,0,MinionMoveID.crusade_t2);
+         _loc1_.AddMoveToTree(0,0,MinionMoveID.crusade_t3);
+         _loc1_.AddMoveToTree(1,0,MinionMoveID.peck_t2);
+         _loc1_.AddMoveToTree(1,0,MinionMoveID.peck_t3);
+         _loc1_.AddMoveToTree(2,0,MinionMoveID.wind_lance_t1);
+         _loc1_.AddMoveToTree(2,0,MinionMoveID.wind_lance_t2);
+         _loc1_.AddMoveToTree(0,1,MinionMoveID.crusade_t4,true);
+         _loc1_.AddMoveToTree(1,1,MinionMoveID.hurricane_t2);
+         _loc1_.AddMoveToTree(1,1,MinionMoveID.hurricane_t3);
+         _loc1_.AddMoveToTree(1,1,MinionMoveID.hurricane_t4);
+         _loc1_.AddMoveToTree(2,1,MinionMoveID.cleansing_heal_t1);
+         _loc1_.AddMoveToTree(2,1,MinionMoveID.cleansing_heal_t3);
+         _loc1_.AddMoveToTree(0,2,MinionMoveID.crusade_t5,true);
+         _loc1_.AddMoveToTree(1,2,MinionMoveID.hurricane_t5,true);
+         _loc1_.AddMoveToTree(2,2,MinionMoveID.flurry_t3);
+         _loc1_.AddMoveToTree(2,2,MinionMoveID.flurry_t4);
+         _loc1_.AddMoveToTree(2,3,MinionMoveID.flurry_t5,true);
+         return _loc1_;
+      }
+
+
       public function DirtFish_Flying() : MinionTalentTree
       {
         var _loc1_:MinionTalentTree = new MinionTalentTree("Flying");

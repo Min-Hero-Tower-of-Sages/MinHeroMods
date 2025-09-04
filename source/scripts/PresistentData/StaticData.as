@@ -159,7 +159,7 @@ package PresistentData
          this.SetupTheEnemyStatBonuses();
          trace("Creating index of all installed mods");
          this.m_all_minion_mods = new Vector.<String>();
-         this.m_all_minion_mods.push("dirtFish","waterRay1","waterRay2");
+         this.m_all_minion_mods.push("dirtFish","waterRay1","waterRay2","holyBirb1","holyBirb2","HolyEye1","HolyEye2","HolyEye3");
          this.m_all_minion_mods.push("BMod 1","BMod 2","BMod 3");
          trace("All known minion mods:");
          for each(var mod in this.m_all_minion_mods)
@@ -376,9 +376,19 @@ package PresistentData
             this.AddMinionToEggery(MinionDexID.DEX_ID_waterBird_1,40,_loc2_);
          }
          _loc2_ = 3;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_healingHorse_1,50,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_holyMantris_1,30,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_tRex_1,20,_loc2_);
+         if(Singleton.dynamicData.m_isMod["HolyBirb1"])
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_healingHorse_1,45,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_holyMantris_1,27,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_tRex_1,18,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_holyBirb_1,10,_loc2_);
+         }
+         else
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_healingHorse_1,50,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_holyMantris_1,30,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_tRex_1,20,_loc2_);
+         }
          _loc2_ = 4;
          // changing all "MinionDexID. DEX_ID_testing_minion" to BMod 1 ID
          this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
@@ -431,12 +441,46 @@ package PresistentData
          this.AddMinionToEggery(MinionDexID.DEX_ID_Crow_2,35,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_Scarecrow_2,25,_loc2_);
          _loc2_ = 16;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_EvilEye_1,15,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_Crow_1,15,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_BlueBell_1,15,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_PinkBell_1,15,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_FireGhost_1,25,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_HolyStrongGuy_1,15,_loc2_);
+         if(Singleton.dynamicData.m_isMod["HolyEye1"]&&Singleton.dynamicData.m_isMod["holyBirb1"])
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_EvilEye_1,11,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Crow_1,11,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_BlueBell_1,11,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_PinkBell_1,11,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_FireGhost_1,20,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_HolyStrongGuy_1,11,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_holy_eye_2,14,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_holyBirb_2,11,_loc2_);
+         }
+         else if(Singleton.dynamicData.m_isMod["HolyEye1"])
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_EvilEye_1,13,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Crow_1,13,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_BlueBell_1,13,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_PinkBell_1,13,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_FireGhost_1,20,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_HolyStrongGuy_1,13,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_holy_eye_2,15,_loc2_);
+         }
+         else if(Singleton.dynamicData.m_isMod["holyBirb1"])
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_EvilEye_1,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Crow_1,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_BlueBell_1,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_PinkBell_1,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_FireGhost_1,25,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_HolyStrongGuy_1,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_holyBirb_2,15,_loc2_);
+         }
+         else
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_EvilEye_1,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Crow_1,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_BlueBell_1,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_PinkBell_1,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_FireGhost_1,25,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_HolyStrongGuy_1,15,_loc2_);
+         }
          _loc2_ = 17;
          this.AddMinionToEggery(MinionDexID.DEX_ID_EvilEye_2,20,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_Crow_2,20,_loc2_);
@@ -478,13 +522,28 @@ package PresistentData
             this.AddMinionToEggery(MinionDexID.DEX_ID_tRex_2,5,_loc2_);
          }
          _loc2_ = 22;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_fire_frog_1,10,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_groundMole_3,35,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_worm_2,5,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_worm_3,20,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_fire_bear_1,5,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_fire_bear_2,15,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_tortoise_1,10,_loc2_);
+         if(Singleton.dynamicData.m_isMod["HolyEye1"])
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_fire_frog_1,9,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_groundMole_3,32,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_worm_2,4,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_worm_3,19,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_fire_bear_1,4,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_fire_bear_2,14,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_tortoise_1,9,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_holy_eye_3,9,_loc2_);
+         }
+         else
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_fire_frog_1,10,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_fire_frog_1,10,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_groundMole_3,35,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_worm_2,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_worm_3,20,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_fire_bear_1,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_fire_bear_2,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_tortoise_1,10,_loc2_);
+         }
          _loc2_ = 23;
          this.AddMinionToEggery(MinionDexID.DEX_ID_tikiMonkey_1,5,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_tikiMonkey_2,20,_loc2_);
@@ -499,16 +558,33 @@ package PresistentData
          _loc2_ = 24;
          this.AddMinionToEggery(this.ModToDexID["BMod 1"],60,_loc2_);
          _loc2_ = 25;
-         this.AddMinionToEggery(MinionDexID.DEX_ID_DogEel_1,5,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_DogEel_2,25,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_JellyFish_1,5,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_JellyFish_2,25,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_Griffen_1,5,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_Griffen_2,15,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_cheetah_1,5,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_cheetah_2,5,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_cheetah_3,5,_loc2_);
-         this.AddMinionToEggery(MinionDexID.DEX_ID_waterHorse_1,5,_loc2_);
+         if(Singleton.dynamicData.m_isMod["HolyEye1"])
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_DogEel_1,4,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_DogEel_2,24,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_JellyFish_1,4,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_JellyFish_2,24,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Griffen_1,4,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Griffen_2,14,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_cheetah_1,4,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_cheetah_2,4,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_cheetah_3,4,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_waterHorse_1,4,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_holy_eye_1,10,_loc2_);
+         }
+         else
+         {
+            this.AddMinionToEggery(MinionDexID.DEX_ID_DogEel_1,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_DogEel_2,25,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_JellyFish_1,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_JellyFish_2,25,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Griffen_1,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_Griffen_2,15,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_cheetah_1,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_cheetah_2,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_cheetah_3,5,_loc2_);
+            this.AddMinionToEggery(MinionDexID.DEX_ID_waterHorse_1,5,_loc2_);
+         }
          _loc2_ = 26;
          this.AddMinionToEggery(MinionDexID.DEX_ID_Scorpion_1,5,_loc2_);
          this.AddMinionToEggery(MinionDexID.DEX_ID_Goo_1,5,_loc2_);

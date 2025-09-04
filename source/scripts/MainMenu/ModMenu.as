@@ -23,7 +23,7 @@ package MainMenu
       {
          super();
          this.m_toggleTexts = new Vector.<String>();
-         this.m_toggleTexts.push("Zanyu","Stingaray","Mantaray");
+         this.m_toggleTexts.push("Zanyu","Stingaray","Mantaray","Arkvian", "Arkclaw","Adophan", "Ophan", "Ophance");
       }
       
       public function LoadSprites() : void

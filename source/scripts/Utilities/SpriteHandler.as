@@ -2670,6 +2670,16 @@ package Utilities
 
       private static var waterRay2:Class = SpriteHandler_waterRay2;
 
+      private static var HolyBirb1:Class = SpriteHandler_HolyBirb1;
+
+      private static var HolyBirb2:Class = SpriteHandler_HolyBirb2;
+
+      private static var HolyEye1:Class = SpriteHandler_HolyEye1;
+
+      private static var HolyEye2:Class = SpriteHandler_HolyEye2;
+
+      private static var HolyEye3:Class = SpriteHandler_HolyEye3;
+
       private static var mainMenu_modMenuBackground:Class = SpriteHandler_mainMenu_modMenuBackground;
       
       private var MAIN_FONT:Class = SpriteHandler_MAIN_FONT;

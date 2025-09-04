@@ -123,10 +123,21 @@ package Minions
          {
             this.dirtFish_stage1();
          }
-         if(Singleton.dynamicData.m_isMod["waterRay"])
+         if(Singleton.dynamicData.m_isMod["waterRay1"])
          {
             this.waterRay_stage1();
             this.waterRay_stage2();
+         }
+         if(Singleton.dynamicData.m_isMod["holyBirb1"])
+         {
+            this.holyBirb_stage1();
+            this.holyBirb_stage2();
+         }
+         if(Singleton.dynamicData.m_isMod["HolyEye1"])
+         {
+            this.HolyEye_stage1();
+            this.HolyEye_stage2();
+            this.HolyEye_stage3();
          }
          this.BattleMod_stage1();
          this.BattleMod_stage2();
@@ -154,6 +165,110 @@ package Minions
       public function GetBaseMinion(param1:int) : BaseMinion
       {
          return this.m_allMinions[param1];
+      }
+
+
+      private function HolyEye_stage1() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["HolyEye1"],"Adophan","HolyEye1",15,35,61,72,85,MinionType.TYPE_HOLY);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_VERY_EASY;
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 2;
+         _loc1_.m_evolutionLevel = 20;
+         _loc1_.AddStartingMove(MinionMoveID.holy_strike_t1);
+         _loc1_.AddStartingMove(MinionMoveID.pound_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.hope_t1,MinionMoveID.mending_inspiration_t1,MinionMoveID.demonic_force_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.HolyBell_Holy();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.HolyMantis_Normal();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.BatDemon_Demonic();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function HolyEye_stage2() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["HolyEye2"],"Ophan","HolyEye2",15,35,61,72,85,MinionType.TYPE_HOLY);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_NORMAL;
+         _loc1_.m_numberOfGems = 3;
+         _loc1_.m_numberOfLockedGems = 1;
+         _loc1_.m_evolutionLevel = 38;
+         _loc1_.AddStartingMove(MinionMoveID.holy_strike_t1);
+         _loc1_.AddStartingMove(MinionMoveID.pound_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.hope_t1,MinionMoveID.mending_inspiration_t1,MinionMoveID.demonic_force_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.HolyBell_Holy();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.HolyMantis_Normal();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.BatDemon_Demonic();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+      
+      private function HolyEye_stage3() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["HolyEye3"],"Ophance","HolyEye3",20,35,61,72,85,MinionType.TYPE_HOLY);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD;
+         _loc1_.m_numberOfGems = 4;
+         _loc1_.m_numberOfLockedGems = 0;
+         _loc1_.AddStartingMove(MinionMoveID.holy_strike_t1);
+         _loc1_.AddStartingMove(MinionMoveID.pound_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.hope_t1,MinionMoveID.mending_inspiration_t1,MinionMoveID.demonic_force_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.HolyBell_Holy();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.HolyMantis_Normal();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.BatDemon_Demonic();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+      
+      private function holyBirb_stage1() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["holyBirb1"],"Arkvian","holyBirb1",15,28,55,60,80,MinionType.TYPE_HOLY,MinionType.TYPE_FLYING);
+         _loc1_.m_minionIconPositioningX = 10;
+         _loc1_.m_minionIconPositioningY = 20;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_NORMAL;
+         _loc1_.m_evolutionLevel = 28;
+         _loc1_.m_numberOfGems = 3;
+         _loc1_.m_numberOfLockedGems = 0;
+         _loc1_.AddStartingMove(MinionMoveID.peck_t1);
+         _loc1_.AddStartingMove(MinionMoveID.claw_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.holyLight_t1,MinionMoveID.flurry_t1,MinionMoveID.nourish_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.HolyMantis_Holy();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.holyBirb_Flying();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.IceTree_Healing();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+      
+      private function holyBirb_stage2() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["holyBirb2"],"Arkclaw","holyBirb2",20,32,65,65,85,MinionType.TYPE_HOLY,MinionType.TYPE_FLYING);
+         _loc1_.m_minionIconPositioningX = 8;
+         _loc1_.m_minionIconPositioningY = 9;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD;
+         _loc1_.m_numberOfGems = 4;
+         _loc1_.m_numberOfLockedGems = 0;
+         _loc1_.AddStartingMove(MinionMoveID.peck_t1);
+         _loc1_.AddStartingMove(MinionMoveID.claw_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.holyLight_t1,MinionMoveID.flurry_t1,MinionMoveID.nourish_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.HolyMantis_Holy();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.holyBirb_Flying();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.IceTree_Healing();
+         _loc1_.SetTalentTree(2,_loc2_);
       }
 
       private function waterRay_stage1() : void

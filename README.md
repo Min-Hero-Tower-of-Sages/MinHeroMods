@@ -1,7 +1,5 @@
 All the mods for Min Hero: Tower of Sages are to be compiled here, in a single file with customizeable options.
 
-Stay tuned!
-
 
 ## USAGE:
 * Download the "default.swf" from here
@@ -9,6 +7,10 @@ Stay tuned!
 * Done!
 This is forwards-compatiable, or you can use your old save with this one!
 This is **NOT backwards-compatiable**, so if you create a save that contains Zanyu, it cannot be used in the normal game
+
+### MOD TOGGLES
+You can only toggle mods at the beginning of a save.
+Due to the method that I have constructed the mod toggles, you have to do certain "mods" in batches. See "MINIONS" tab in "Content" here for what ones need to be toggled simultaneously.
 
 
 ## CURRENT VERSION:
@@ -24,8 +26,13 @@ This is **NOT backwards-compatiable**, so if you create a save that contains Zan
 
 ### Content:
 
+#### MINIONS
 * Zanyu
 * Stingaray/Mantaray
+* Arkvian/Arkclaw
+* Adophan/Ophan/Ophance
+
+#### OTHER
 * BetterGems
 * Deleted SoGood intro (for the greater good)
 
@@ -33,6 +40,8 @@ This is **NOT backwards-compatiable**, so if you create a save that contains Zan
 
 Core (things that are present across all versions)
 * Fix the spelling mistakes in the code. It's so easy to do, we might as well
+* Add scrolling ability to the mod list
+* Add mod grouping (so 1 toggle per species, instead of 1-3 per)
  
 Multi (things just for the multiplayer as that's going to enter here RAAH)
 * Check BattleSystem for socket entry point
