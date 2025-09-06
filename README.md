@@ -41,7 +41,6 @@ Due to the method that I have constructed the mod toggles, you have to do certai
 Core (things that are present across all versions)
 * Fix the spelling mistakes in the code. It's so easy to do, we might as well
 * Add scrolling ability to the mod list
-* Add mod grouping (so 1 toggle per species, instead of 1-3 per)
  
 Multi (things just for the multiplayer as that's going to enter here RAAH)
 * Check BattleSystem for socket entry point
