@@ -323,14 +323,14 @@ package MainMenu
          }
          this.m_charCreationPopup = new CharCreationPopup();
          this.m_charCreationPopup.LoadSprites();
-         this.m_charCreationPopup.x = 20; //changed to 20 from 108
+         this.m_charCreationPopup.x = -5; //changed to -5 from 108
          this.m_charCreationPopup.y = 139;
          addChild(this.m_charCreationPopup);
          //INSERTING CUSTOM MOD CONFIG MENU
          this.m_modMenu = new ModMenu(); //new there's a funky script for it
          this.m_modMenu.LoadSprites();
-         this.m_modMenu.x = 500;
-         this.m_modMenu.y = 139;
+         this.m_modMenu.x = 478;
+         this.m_modMenu.y = 144;
          addChild(this.m_modMenu);
          //END
 

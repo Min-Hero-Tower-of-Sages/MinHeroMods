@@ -1,16 +1,5 @@
 All the issues that currently plague the SWF will be detailed here:
 
-
-TODO:
-* Ask TxPoT about his rebalancing mod (make into a toggleable mod, it will work that way)
-* Make Demo Video and post to YT
-* Make guide for mobile
-* Add Mod Menu scrolling (see Minionpedia)
-* Add rest of minions (optional)
-* Begin to add Ice Floor
-
-
-
 * "ArgumentError: Error #2025: The supplied DisplayObject must be a child of the caller."
   * When using "Skip" button
   * From activation of TopDownMovementScreen
@@ -29,10 +18,6 @@ SecurityError: Error #2148: SWF file file:///D|/Min%20HEROOO/MinHeroMods/default
 	at flash.utils::Timer/tick()
 ***
 * Caused by idling on character creation screen
-
-
-
-
 
 
 VANILLA ISSUES (can be "ignored" due to niche case, solvability in-game, or quirk of Flash)

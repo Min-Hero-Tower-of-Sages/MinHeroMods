@@ -8,6 +8,9 @@ package MainMenu
    import flash.text.TextFormat;
    import flash.text.TextFormatAlign;
    import flash.utils.Dictionary;
+   import SharedObjects.BaseInterfacePieces.TCButton;
+   import flash.events.MouseEvent;
+   import com.greensock.TweenLite;
 
    public class ModMenu extends Sprite
    {
@@ -21,18 +24,30 @@ package MainMenu
       private var m_toggleTexts:Vector.<String>;      
 
       private var m_toggleDict:Dictionary;
-      
+
+      private var m_modSelectHolder:Sprite; //for scrolling
+
+      private var m_upButton:TCButton;
+
+      private var m_downButton:TCButton;
+
+      private var m_modSelectMask:Sprite;
+
+      private var  m_scrollPosition:int = 0; //current scroll position
+
+      private var m_scrollMax:int = 4; //max scroll position
+
       public function ModMenu()
       {
          super();
          this.m_toggleTexts = new Vector.<String>();
-         this.m_toggleTexts.push("Zanyu","Stingaray/Mantaray","Arkvian/Arkclaw","Adophan/Ophan/Ophance"); //still need this for ordering
+         this.m_toggleTexts.push("Zanyu","Stingaray","Arkvian","Ophan"); //still need this for ordering. Make as small as possibe
          this.m_toggleDict = new Dictionary();
          this.m_toggleDict["Example"] = ["Tooltip description about the Example mod.", "Toggle1 (the minion)", "Extra toggles like this"];
          this.m_toggleDict["Zanyu"] = ["Bring the might of the legendary beast to your team! Featuring a custom Skill Tree, and powerful moves, they can be found in Floor 5-2!", "dirtFish"];
-         this.m_toggleDict["Stingaray/Mantaray"] = ["A fearsome minion of the sea, ready to bring a Water-infused playstyle! Swim over to Stingaray in Floor 1-3, and 3-1!", "waterFish1", "waterFish2"];
-         this.m_toggleDict["Arkvian/Arkclaw"] = ["A holy counterpart to Airmony and Falcona, a serene bird prepared to become the next party member! Soar to Arkvian in Floor 1-4 and Arkclaw in Floor 4-2", "holyBirb1", "holyBirb2"];
-         this.m_toggleDict["Adophan/Ophan/Ophance"] = ["Cultivate a curious one-eyed creature into a fast, lethal minion under your command! Find Ophan in 4-2 and Adophan in 5-3!", "HolyEye1", "HolyEye2", "HolyEye3"];
+         this.m_toggleDict["Stingaray"] = ["A fearsome minion of the sea, ready to bring a Water-infused playstyle! Swim over to Stingaray in Floor 1-3, and 3-1!", "waterRay1", "waterRay2"];
+         this.m_toggleDict["Arkvian"] = ["A holy counterpart to Airmony and Falcona, a serene bird prepared to become the next party member! Soar to Arkvian in Floor 1-4 and Arkclaw in Floor 4-2", "holyBirb1", "holyBirb2"];
+         this.m_toggleDict["Ophan"] = ["Cultivate a curious one-eyed creature into a fast, lethal minion under your command! Find Ophan in 4-2 and Adophan in 5-3!", "HolyEye1", "HolyEye2", "HolyEye3"];
 
       }
       
@@ -46,32 +61,103 @@ package MainMenu
          _loc1_.color = 16448250;
          _loc1_.size = 16;
          _loc1_.font = "BurbinCasual";
-         _loc1_.align = TextFormatAlign.CENTER;
+         _loc1_.align = TextFormatAlign.LEFT;
+
+         //scrolling window
+         this.m_modSelectHolder = new Sprite();
+         this.m_modSelectHolder.x = 10;
+         this.m_modSelectHolder.y = 40;
+         addChild(this.m_modSelectHolder);
+         this.m_modSelectMask = new Sprite(); //a mask?
+         this.m_modSelectMask.x = 5; //who knows what these should be lol
+         this.m_modSelectMask.y = 30;
+         this.m_modSelectMask.graphics.beginFill(5592405);
+         this.m_modSelectMask.graphics.drawRect(0,0,200,230); //testing it: increase Y coords
+         this.m_modSelectMask.graphics.endFill();
+         addChild(this.m_modSelectMask);
+         this.m_modSelectHolder.mask = this.m_modSelectMask;
+
          var _loc4_:int = 0;
          while(_loc4_ < this.m_settingTexts.length)
          {
             this.m_settingTexts[_loc4_] = new TextField();
             this.m_settingTexts[_loc4_].embedFonts = true;
-            _loc1_.size = 16;
-            _loc1_.align = TextFormatAlign.LEFT;
             this.m_settingTexts[_loc4_].defaultTextFormat = _loc1_;
             this.m_settingTexts[_loc4_].wordWrap = true;
             this.m_settingTexts[_loc4_].autoSize = TextFieldAutoSize.LEFT;
             this.m_settingTexts[_loc4_].text = this.m_toggleTexts[_loc4_];
-            this.m_settingTexts[_loc4_].width = 150;
-            this.m_settingTexts[_loc4_].x = 12;
-            this.m_settingTexts[_loc4_].y = 45 + _loc4_ * 38;
+            this.m_settingTexts[_loc4_].width = 80;
+            this.m_settingTexts[_loc4_].x = 10;
+            this.m_settingTexts[_loc4_].y = 11 + _loc4_ * 38;
             this.m_settingTexts[_loc4_].selectable = false;
-            addChild(this.m_settingTexts[_loc4_]);
+            this.m_modSelectHolder.addChild(this.m_settingTexts[_loc4_]); //adding to the mod select holder instead
             this.m_toggleButtons[_loc4_] = new ToggleButton(this.ToggleCarousel,"menus_settings_onButton","menus_settings_offButton","","",this.m_toggleTexts[_loc4_]); //last param is text of button
-            this.m_toggleButtons[_loc4_].x = 100;
-            this.m_toggleButtons[_loc4_].y = 51 + _loc4_ * 38;
-            addChild(this.m_toggleButtons[_loc4_]);
+            this.m_toggleButtons[_loc4_].x = 98;
+            this.m_toggleButtons[_loc4_].y = 11 + _loc4_ * 38;
+            this.m_modSelectHolder.addChild(this.m_toggleButtons[_loc4_]);
             _loc4_++;
          }
+         //the buttons
+         this.m_upButton = new TCButton(this.UpPressed,"minionPedia_upArrow");
+         this.m_upButton.x = 175; //making this stuff up
+         this.m_upButton.y = 10;
+         this.addChild(this.m_upButton);
+         this.m_downButton = new TCButton(this.DownPressed,"minionPedia_upArrow"); //down is just "Up" flipped
+         this.m_downButton.x = 175;
+         this.m_downButton.y = 280;
+         this.m_downButton.scaleY = -1; //flippie
+         this.addChild(this.m_downButton);
          visible = false;
       }
       
+      private function UpPressed(param1:MouseEvent) : void //scroll up event
+      {
+         trace("Up Pressed");
+         --this.m_scrollPosition;
+         this.UpdateTheScrollBoxPosition();
+      }
+      
+      private function DownPressed(param1:MouseEvent) : void //scroll down event
+      {
+         trace("Down Pressed");
+         ++this.m_scrollPosition;
+         this.UpdateTheScrollBoxPosition();
+      }
+
+      private function UpdateTheScrollBoxPosition() : void
+      {
+         trace("Updating scroll box position");
+         if(this.m_scrollPosition < 0) //edge case checks to prevent stupid scrolling
+         {
+            this.m_scrollPosition = 0;
+         }
+         if(this.m_scrollPosition > this.m_scrollMax)
+         {
+            this.m_scrollPosition = this.m_scrollMax;
+         }
+         //perform a tween to the new position
+         var _loc1_:Number = 43 + -this.m_modSelectHolder.height / 20 * this.m_scrollPosition;
+         TweenLite.to(this.m_modSelectHolder,0.5,{"y":_loc1_});
+         //hide the buttons if at the top or bottom
+         if(this.m_scrollPosition == 0)
+         {
+            this.m_upButton.visible = false;
+         }
+         else
+         {
+            this.m_upButton.visible = true;
+         }
+         if(this.m_scrollPosition == this.m_scrollMax)
+         {
+            this.m_downButton.visible = false;
+         }
+         else
+         {
+            this.m_downButton.visible = true;
+         }
+      }
+
+
       public function BringIn() : void
       {
          var i:int = 0;
@@ -81,6 +167,8 @@ package MainMenu
             i++;
          }
          Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMenuScreen.ApplyMenuBringInAnimationJustFade(this);
+         this.m_scrollPosition = 0;
+         this.UpdateTheScrollBoxPosition();
       }
       
       public function ToggleCarousel(param1:String) : void //param1 is the button name

@@ -8,9 +8,7 @@ file_changes.csv
 Logs - Raccourci.lnk
 # folder created due to vscode
 /.vscode
-# personal note for myself: can be removed if anyone wants to see me natter on lol
-square's notes on modloader system.txt 
-# my other mods that I'll integrate at some point: can be removed if anyone wants to see half-baked mods in different files
+# my other mods that I'll integrate at some point: can be removed if anyone wants to see half-baked mods in different files, as well as some errant scripts
 /square_test
 
 #my batch script to start it faster
@@ -19,3 +17,4 @@ start.bat
 FlashPlayer.exe 
 # link to save files for the default.swf when tested on me PC
 SWF Saves - Shortcut.lnk
+
