@@ -10,20 +10,11 @@ This is **NOT backwards-compatiable**, so if you create a save that contains Zan
 
 ### MOD TOGGLES
 You can only toggle mods at the beginning of a save.
-Due to the method that I have constructed the mod toggles, you have to do certain "mods" in batches. See "MINIONS" tab in "Content" here for what ones need to be toggled simultaneously.
+Due to the method that I have constructed the mod toggles, you can toggle the minion corresponding to a "species" toggle all of them. Make sure to double-check if the minions are actually there! You can do this by immediately opening the Minionpedia, and seeing how many extra minions beyond 101 there are. This should correspond to the number of minions you added. For example, adding Zanyu, and Stingaray, would mean 3 extra minions, so if you don't see a number 104, then you've not actually toggled them!
 
 
 ## CURRENT VERSION:
-### Technical:
-* Generates DexID for new minions
-* Multiplayer code added (UNTESTED)
-* Rearrangement of features to accommodate for modloader system
-* Saves modded minions by ModName instead of DexID
-* Able to load mod config successfully
-* Removed remnants of sitelock (yes there was one)
-* Added mod config menu background image
-* Toggles added
-
+The latest *committed* version, the default.swf that you find here, and not in releases. Content made in a release is detailed in its release notes
 ### Content:
 
 #### MINIONS
