@@ -183,7 +183,6 @@ package PresistentData
          this.m_isMapUnlocked = new Vector.<Boolean>(Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER);
          this.m_hasTutorialsBeenSeen = new Vector.<Boolean>(TutorialTypes.NUM_OF_TUTORIALS);
          this.m_ownedGems = new Vector.<OwnedGem>(1485);
-         Singleton.staticData.CreateObjectsAfterDynamicData();
          this.LoadInitialData();
          this.LoadData(this.m_saveSlot,false);
          this.m_isTalentTreeInSimpleMode = false;

@@ -139,6 +139,21 @@ package Minions
             this.HolyEye_stage2();
             this.HolyEye_stage3();
          }
+         if(Singleton.dynamicData.m_isMod["iceFloor"])
+         {
+            this.iMammoth_stage1();
+            this.iMammoth_stage2();
+            this.iMammoth_stage3();
+            this.iSloth_stage1();
+            this.iSloth_stage2();
+            this.iSloth_stage3();
+            this.iUnicorn_stage1();
+            this.iUnicorn_stage2();
+            this.iUnicorn_stage3();
+            this.iSeal_stage1();
+            this.iSeal_stage2();
+            this.iSeal_stage3();
+         }
          this.BattleMod_stage1();
          this.BattleMod_stage2();
          this.BattleMod_stage3();
@@ -167,6 +182,244 @@ package Minions
          return this.m_allMinions[param1];
       }
 
+      private function iMammoth_stage1() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iMammoth1"],"Frosttusk","iMammoth",31,22,31,21,28,Singleton.staticData.ModToTypeID["thaw"]);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 2;
+         _loc1_.m_evolutionLevel = 29;
+         _loc1_.AddStartingMove(MinionMoveID.pound_t1);
+         _loc1_.AddStartingMove(MinionMoveID.flurry_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.icy_blast_t1,Singleton.staticData.ModToMoveID["iHorn_t1"],MinionMoveID.ice_enclosure_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.IceBird_Ice();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iMammoth_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.IceDeer_Healing();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iMammoth_stage2() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iMammoth2"],"Tuskhorn","iMammoth",23,19,26,17,23,Singleton.staticData.ModToTypeID["thaw"]);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 2;
+         _loc1_.m_evolutionLevel = 35;
+         _loc1_.AddStartingMove(MinionMoveID.pound_t1);
+         _loc1_.AddStartingMove(MinionMoveID.flurry_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.icy_blast_t1,Singleton.staticData.ModToMoveID["iHorn_t1"],MinionMoveID.ice_enclosure_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.IceBird_Ice();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iMammoth_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.IceDeer_Healing();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iMammoth_stage3() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iMammoth3"],"Thawhorn","iMammoth",78,31,85,22,60,Singleton.staticData.ModToTypeID["thaw"]);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_VERY_HARD
+         _loc1_.m_numberOfGems = 4;
+         _loc1_.m_numberOfLockedGems = 0;
+         _loc1_.AddStartingMove(MinionMoveID.pound_t1);
+         _loc1_.AddStartingMove(MinionMoveID.flurry_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.icy_blast_t1,Singleton.staticData.ModToMoveID["iHorn_t1"],MinionMoveID.ice_enclosure_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.IceBird_Ice();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iMammoth_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.IceDeer_Healing();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iSloth_stage1() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iSloth1"],"Idlefrost","iSloth",26,13,33,8,12,Singleton.staticData.ModToTypeID["thaw"],MinionType.TYPE_demonic);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 2;
+         _loc1_.m_evolutionLevel = 25;
+         _loc1_.AddStartingMove(MinionMoveID.claw_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.blood_press_t1,MinionMoveID.icy_blast_t1,MinionMoveID.invigorate_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.DemonicCat_Demonic();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iSloth_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.WaterSeal_Support();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iSloth_stage2() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iSloth2"],"Slowfrost","iSloth",24,14,34,25,22,Singleton.staticData.ModToTypeID["thaw"],MinionType.TYPE_demonic);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 2;
+         _loc1_.m_evolutionLevel = 33;
+         _loc1_.AddStartingMove(MinionMoveID.claw_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.blood_press_t1,MinionMoveID.icy_blast_t1,MinionMoveID.invigorate_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.DemonicCat_Demonic();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iSloth_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.WaterSeal_Support();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iSloth_stage3() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iSloth3"],"Slowthaw","iSloth",74,29,95,28,43,Singleton.staticData.ModToTypeID["thaw"],MinionType.TYPE_demonic);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 4;
+         _loc1_.m_numberOfLockedGems = 0;
+         _loc1_.AddStartingMove(MinionMoveID.claw_t1);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.blood_press_t1,MinionMoveID.icy_blast_t1,MinionMoveID.invigorate_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.DemonicCat_Demonic();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iSloth_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.WaterSeal_Support();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iUnicorn_stage1() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iUnicorn1"],"Frosticorn","iUnicorn",16,16,30,15,15,Singleton.staticData.ModToTypeID["thaw"],MinionType.TYPE_water);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 2;
+         _loc1_.m_evolutionLevel = 28;
+         _loc1_.AddStartingMove(Singleton.staticData.ModToMoveID["iHorn_t1"]);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.waterjet_t1,Singleton.staticData.ModToMoveID["iMicro_t1"],MinionMoveID.tire_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.JellyFish_Water();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iUnicorn_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.LandShark_Support();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iUnicorn_stage2() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iUnicorn2"],"Unithawl","iUnicorn",23,17,35,29,29,Singleton.staticData.ModToTypeID["thaw"],MinionType.TYPE_water);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 2;
+         _loc1_.m_evolutionLevel = 32;
+         _loc1_.AddStartingMove(Singleton.staticData.ModToMoveID["iHorn_t1"]);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.waterjet_t1,Singleton.staticData.ModToMoveID["iMicro_t1"],MinionMoveID.tire_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.JellyFish_Water();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iUnicorn_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.LandShark_Support();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iUnicorn_stage3() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iUnicorn3"],"Narthawl","iUnicorn",29,31,75,48,81,Singleton.staticData.ModToTypeID["thaw"],MinionType.TYPE_water);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 4;
+         _loc1_.m_numberOfLockedGems = 0;
+         _loc1_.AddStartingMove(Singleton.staticData.ModToMoveID["iHorn_t1"]);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.waterjet_t1,Singleton.staticData.ModToMoveID["iMicro_t1"],MinionMoveID.tire_t1);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.JellyFish_Water();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iUnicorn_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.LandShark_Support();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iSeal_stage1() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iSeal1"],"Walfrost","iSeal",21,14,29,16,19,Singleton.staticData.ModToTypeID["thaw"],MinionType.TYPE_water);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 2;
+         _loc1_.m_evolutionLevel = 31;
+         _loc1_.AddStartingMove(Singleton.staticData.ModToMoveID["iHorn_t1"]);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.water_slam_t1,Singleton.staticData.ModToMoveID["iStrike_t1"],MinionMoveID.reflect_damage_t2);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.UndeadEel_Water();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iSeal_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.WaterHorse_Normal();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iSeal_stage2() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iSeal2"],"Seafrost","iSeal",22,19,34,24,26,Singleton.staticData.ModToTypeID["thaw"],MinionType.TYPE_water);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 2;
+         _loc1_.m_numberOfLockedGems = 2;
+         _loc1_.m_evolutionLevel = 39;
+         _loc1_.AddStartingMove(Singleton.staticData.ModToMoveID["iHorn_t1"]);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.water_slam_t1,Singleton.staticData.ModToMoveID["iStrike_t1"],MinionMoveID.reflect_damage_t2);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.UndeadEel_Water();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iSeal_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.WaterHorse_Normal();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
+
+      private function iSeal_stage3() : void
+      {
+         var _loc2_:MinionTalentTree = null;
+         var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["iSeal3"],"Thawlrus","iSeal",88,44,87,50,58,Singleton.staticData.ModToTypeID["thaw"],MinionType.TYPE_water);
+         _loc1_.m_minionIconPositioningX = 0;
+         _loc1_.m_minionIconPositioningY = 0;
+         _loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_HARD
+         _loc1_.m_numberOfGems = 4;
+         _loc1_.m_numberOfLockedGems = 0;
+         _loc1_.AddStartingMove(Singleton.staticData.ModToMoveID["iHorn_t1"]);
+         _loc1_.SetSpeacilizaionMoves(MinionMoveID.water_slam_t1,Singleton.staticData.ModToMoveID["iStrike_t1"],MinionMoveID.reflect_damage_t2);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.UndeadEel_Water();
+         _loc1_.SetTalentTree(0,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.iSeal_Thaw();
+         _loc1_.SetTalentTree(1,_loc2_);
+         _loc2_ = Singleton.staticData.m_baseTalentTreesList.WaterHorse_Normal();
+         _loc1_.SetTalentTree(2,_loc2_);
+      }
 
       private function HolyEye_stage1() : void
       {

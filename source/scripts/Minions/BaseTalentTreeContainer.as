@@ -1,6 +1,7 @@
 package Minions
 {
    import States.MinionMoveID;
+   import Utilities.Singleton; //now I need this for modded moves.... surely it'll be fine?
    
    public class BaseTalentTreeContainer
    {
@@ -8,6 +9,97 @@ package Minions
       public function BaseTalentTreeContainer()
       {
          super();
+      }
+     
+      public function iSeal_Thaw() : MinionTalentTree
+      {
+         var _loc1_:MinionTalentTree = new MinionTalentTree("Thaw");
+         _loc1_.AddMoveToTree(0,0,Singleton.staticData.ModToMoveID["iMicro_t1"]);
+         _loc1_.AddMoveToTree(0,0,Singleton.staticData.ModToMoveID["iMicro_t2"]);
+         _loc1_.AddMoveToTree(1,0,Singleton.staticData.ModToMoveID["iStrike_t2"]);
+         _loc1_.AddMoveToTree(1,0,Singleton.staticData.ModToMoveID["iStrike_t3"]);
+         _loc1_.AddMoveToTree(2,0,Singleton.staticData.ModToMoveID["iBreath_t1"]);
+         _loc1_.AddMoveToTree(2,0,Singleton.staticData.ModToMoveID["iBreath_t1"]);
+         _loc1_.AddMoveToTree(0,1,Singleton.staticData.ModToMoveID["iMicro_t3"],true);
+         _loc1_.AddMoveToTree(0,1,Singleton.staticData.ModToMoveID["iMicro_t4"],true);
+         _loc1_.AddMoveToTree(1,1,Singleton.staticData.ModToMoveID["iStrike_t4"],true);
+         _loc1_.AddMoveToTree(2,1,Singleton.staticData.ModToMoveID["iHorn_t2"]);
+         _loc1_.AddMoveToTree(2,1,Singleton.staticData.ModToMoveID["iHorn_t3"]);
+         _loc1_.AddMoveToTree(2,1,Singleton.staticData.ModToMoveID["iHorn_t4"]);
+         _loc1_.AddMoveToTree(0,2,Singleton.staticData.ModToMoveID["iMicro_t5"],true);
+         _loc1_.AddMoveToTree(1,2,MinionMoveID.hailstone_t4);
+         _loc1_.AddMoveToTree(2,2,Singleton.staticData.ModToMoveID["iMelt_t5"]);
+         _loc1_.AddMoveToTree(1,3,MinionMoveID.hailstone_t5,true);
+         return _loc1_;
+      }
+
+      public function iSloth_Thaw() : MinionTalentTree
+      {
+         var _loc1_:MinionTalentTree = new MinionTalentTree("Thaw");
+         _loc1_.AddMoveToTree(0,0,MinionMoveID.demonic_force_t1);
+         _loc1_.AddMoveToTree(0,0,MinionMoveID.demonic_force_t2);
+         _loc1_.AddMoveToTree(0,0,MinionMoveID.demonic_force_t3);
+         _loc1_.AddMoveToTree(1,0,Singleton.staticData.ModToMoveID["iStrike_t1"]);
+         _loc1_.AddMoveToTree(1,0,Singleton.staticData.ModToMoveID["iStrike_t2"]);
+         _loc1_.AddMoveToTree(2,0,MinionMoveID.prehistoric_bite_t1);
+         _loc1_.AddMoveToTree(2,0,MinionMoveID.prehistoric_bite_t2);
+         _loc1_.AddMoveToTree(0,1,MinionMoveID.demonic_bargain_t3);
+         _loc1_.AddMoveToTree(0,1,MinionMoveID.demonic_bargain_t4);
+         _loc1_.AddMoveToTree(1,1,Singleton.staticData.ModToMoveID["iStrike_t3"]);
+         _loc1_.AddMoveToTree(2,1,MinionMoveID.prehistoric_bite_t3,true);
+         _loc1_.AddMoveToTree(0,2,MinionMoveID.demonic_bargain_t5,true);
+         _loc1_.AddMoveToTree(1,2,Singleton.staticData.ModToMoveID["mud_blast_t3"]); //replacing all instances of "iSland" with "Mud Blast" for now
+         _loc1_.AddMoveToTree(1,2,Singleton.staticData.ModToMoveID["mud_blast_t4"]);
+         _loc1_.AddMoveToTree(2,2,Singleton.staticData.ModToMoveID["iMelt_t3"]);
+         _loc1_.AddMoveToTree(2,2,Singleton.staticData.ModToMoveID["iMelt_t4"]);
+         _loc1_.AddMoveToTree(1,3,Singleton.staticData.ModToMoveID["mud_blast_t5"],true);
+         return _loc1_;
+      }
+      
+      public function iUnicorn_Thaw() : MinionTalentTree
+      {
+         var _loc1_:MinionTalentTree = new MinionTalentTree("Thaw"); //as this skill tree uses moves that use new ID system, needs to use StaticData from Singleton to get the right ID.
+         _loc1_.AddMoveToTree(0,0,Singleton.staticData.ModToMoveID["iHorn_t2"]);
+         _loc1_.AddMoveToTree(0,0,Singleton.staticData.ModToMoveID["iHorn_t3"]);
+         _loc1_.AddMoveToTree(1,0,Singleton.staticData.ModToMoveID["iMicro_t2"]);
+         _loc1_.AddMoveToTree(2,0,Singleton.staticData.ModToMoveID["iStrike_t1"]);
+         _loc1_.AddMoveToTree(2,0,Singleton.staticData.ModToMoveID["iStrike_t2"]);
+         _loc1_.AddMoveToTree(0,1,Singleton.staticData.ModToMoveID["iFist_t2"]);
+         _loc1_.AddMoveToTree(0,1,Singleton.staticData.ModToMoveID["iFist_t3"]);
+         _loc1_.AddMoveToTree(0,1,Singleton.staticData.ModToMoveID["iFist_t4"]);
+         _loc1_.AddMoveToTree(1,1,Singleton.staticData.ModToMoveID["iMicro_t3"],true);
+         _loc1_.AddMoveToTree(1,1,Singleton.staticData.ModToMoveID["iMicro_t4"],true);
+         _loc1_.AddMoveToTree(2,1,Singleton.staticData.ModToMoveID["iStrike_t3"]);
+         _loc1_.AddMoveToTree(0,2,Singleton.staticData.ModToMoveID["iFist_t5"],true);
+         _loc1_.AddMoveToTree(1,2,Singleton.staticData.ModToMoveID["iMicro_t5"],true);
+         _loc1_.AddMoveToTree(2,2,Singleton.staticData.ModToMoveID["iStrike_t4"],true);
+         _loc1_.AddMoveToTree(2,3,Singleton.staticData.ModToMoveID["iStrike_t5"],true);
+         return _loc1_;
+      }
+      
+      public function iMammoth_Thaw() : MinionTalentTree
+      {
+         var _loc1_:MinionTalentTree = new MinionTalentTree("Thaw"); //as this skill tree uses moves that use new ID system, needs to use StaticData from Singleton to get the right ID.
+         _loc1_.AddMoveToTree(0,0,MinionMoveID.coldfront_t1);
+         _loc1_.AddMoveToTree(0,0,MinionMoveID.coldfront_t2);
+         _loc1_.AddMoveToTree(1,0,Singleton.staticData.ModToMoveID["iHorn_t2"]);
+         _loc1_.AddMoveToTree(1,0,Singleton.staticData.ModToMoveID["iHorn_t3"]);
+         _loc1_.AddMoveToTree(2,0,MinionMoveID.mystic_ice_t1);
+         _loc1_.AddMoveToTree(2,0,MinionMoveID.mystic_ice_t2);
+         _loc1_.AddMoveToTree(0,1,MinionMoveID.vicious_t1);
+         _loc1_.AddMoveToTree(0,1,MinionMoveID.vicious_t2);
+         _loc1_.AddMoveToTree(0,1,MinionMoveID.vicious_t3);
+         _loc1_.AddMoveToTree(1,1,Singleton.staticData.ModToMoveID["iHorn_t4"],true);
+         _loc1_.AddMoveToTree(1,1,Singleton.staticData.ModToMoveID["iHorn_t5"],true);
+         _loc1_.AddMoveToTree(2,1,Singleton.staticData.ModToMoveID["iStrike_t2"]);
+         _loc1_.AddMoveToTree(2,1,Singleton.staticData.ModToMoveID["iStrike_t3"]);
+         _loc1_.AddMoveToTree(0,2,MinionMoveID.vicious_t4,true);
+         _loc1_.AddMoveToTree(0,2,MinionMoveID.vicious_t5,true);
+         _loc1_.AddMoveToTree(1,2,Singleton.staticData.ModToMoveID["iBreath_t3"]);
+         _loc1_.AddMoveToTree(1,2,Singleton.staticData.ModToMoveID["iBreath_t4"]);
+         _loc1_.AddMoveToTree(2,2,Singleton.staticData.ModToMoveID["iStrike_t4"],true);
+         _loc1_.AddMoveToTree(1,3,Singleton.staticData.ModToMoveID["iBreath_t5"],true);
+         return _loc1_;
       }
       
       public function holyBirb_Flying() : MinionTalentTree
@@ -33,7 +125,6 @@ package Minions
          _loc1_.AddMoveToTree(2,3,MinionMoveID.flurry_t5,true);
          return _loc1_;
       }
-
 
       public function DirtFish_Flying() : MinionTalentTree
       {

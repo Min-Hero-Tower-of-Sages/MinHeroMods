@@ -18,3 +18,5 @@ FlashPlayer.exe
 # link to save files for the default.swf when tested on me PC
 SWF Saves - Shortcut.lnk
 
+# Don't need the cache file of scripts to be sent
+__pycache__/*

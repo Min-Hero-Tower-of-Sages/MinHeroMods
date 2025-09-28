@@ -117,7 +117,7 @@ package Minions
          {
             this.ModName = Singleton.staticData.GetBaseMinion(this.m_minionDexID).m_minionBattleSprite; //use the minion battle sprite, duals for codename
          }
-         this.m_IVs = new Vector.<int>(5);
+         this.m_IVs = new Vector.<int>(5); //all initialise to zero, could delete? will do after next mod (if nothing breaks)
          this._minionID = Singleton.dynamicData.GetNextSettingMinionID();
          this._allMoves = new Vector.<int>();
          var _loc3_:int = 0;
@@ -662,7 +662,7 @@ package Minions
          return _loc4_;
       }
       
-      private function GetPassiveIncreasePercentageForStat(param1:int) : Number
+      private function GetPassiveIncreasePercentageForStat(param1:int) : Number //finds passive moves that affect for a stat, including globals from other minions and personal passives.
       {
          var _loc3_:BaseMinionMove = null;
          var _loc5_:Vector.<int> = null;

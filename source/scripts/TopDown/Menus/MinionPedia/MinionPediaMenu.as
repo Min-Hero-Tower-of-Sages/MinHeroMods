@@ -405,6 +405,10 @@ package TopDown.Menus.MinionPedia
                break;
             case MinionType.TYPE_NORMAL:
                _loc2_ = "menus_minionType_normal";
+               break
+            case Singleton.staticData.ModToTypeID["Thaw"]: //for new modded types
+               _loc2_ = "menus_minionType_thaw"
+               break
          }
          return _loc2_;
       }

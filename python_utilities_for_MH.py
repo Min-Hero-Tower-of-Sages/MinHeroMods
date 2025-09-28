@@ -13,40 +13,57 @@ There are some utilities in here too:
 See the "init" dictionaries for the format that is required, happy modding!
 """
 
+#imports
+from math import floor, ceil
 
-#Compilation of functions that can be used to covert max-level game health to coded value for it. Use the "Calc" version to take a coded value into the actual value, and the "Reverse" to put a maximum health and covert it into the game value.
-#i.e use the "Reverse" to get the value you need in init_minion, and "Calc" to verify (in the case of rounding)
-def CalcMinionHealthSimple(baseHealth):       return baseHealth * 6 + 5
-def ReverseMinionHealthSimple(finalHealth):   return (finalHealth-5)/6
-def CalcMinionEnergySimple(baseEnergy):       return ((baseEnergy * 3)+5)*1.5
-def ReverseMinionEnergySimple(finalEnergy):   return ((finalEnergy/1.5) - 5)/3
-def CalcMinionAttackSimple(baseEnergy):       return ((baseEnergy * 3)+5)
-def ReverseMinionAttackSimple(finalEnergy):   return ((finalEnergy) - 5)/3
-def CalcMinionHealingSimple(baseEnergy):      return ((baseEnergy * 3)+5)
-def ReverseMinionHealingSimple(finalEnergy):  return ((finalEnergy) - 5)/3
-def CalcMinionSpeedSimple(baseEnergy):        return ((baseEnergy * 3)+5)
-def ReverseMinionSpeedSimple(finalEnergy):    return ((finalEnergy) - 5)/3
+#a set of utilities to convert from coded value of health into game value, accounting for levels, and vice versa
+def CalcMinionHealth(baseHealth, level=60): #health only, code -> game
+  """The definitive way to calculate health when designing stats at a variety of levels. By default calculates for max-level but can be changed"""
+  value = 20-(level-15) * 12/45
+  if value < 10: value = 10
+  elif value > 20: value = 20
+  else: pass
+  return (baseHealth * level / value) + 5
 
+def ReverseMinionHealth(finalHealth, level=60): #health only, game -> code
+  """Calculates the coded value of health based on the game value. By default calculates for max-level but can be changed"""
+  value = 20-(level-15) * 12/45
+  if value < 10: value = 10
+  elif value > 20: value = 20
+  else: pass
+  return (finalHealth-5)*value/level
 
-#-> options for EXP_Gain_Rate option, ordered by the increase
+def CalcMinionStat(baseValue, level=60,isEnergy=False): #all other, code -> game
+  """The definitive way to calculate non-health stats when designing stats at a variety of levels.
+  Enter the base value, the level of the minion, and whether this stat is Energy
+  By default calculates for max-level but can be changed"""
+  value =((baseValue * level / 20) + 5)
+  if isEnergy: return floor(value * 1.5)
+  else: return value
+
+def ReverseMinionStat(finalValue,level=60,isEnergy=False): #all other, game -> code
+  """Calculates the coded value of a stat based on the game value. By default calculates for max-level but can be changed. Change final parameter if it's Energy"""
+  if isEnergy: return  ceil(((finalValue / 1.5 )- 5) * 20/level)
+  else: return (finalValue - 5) * 20/level
+
+#-> options for EXP_Gain_Rate option, ordered by the difficulcy
 EXP_GAIN_RATES = ["VERY_EASY","EASY","NORMAL","HARD","VERY_HARD"] 
 
-# The MoveTuple is an intuitive way to store move data. 
+# The MoveTuple is an intuitive way to store move data.
 # The first param is the name of the move, and the second is the level, from 1-5. 
-# For unique names at level 5, instead use the name of the less powerful version, and put the level as 5
+# For unique names at level 5, instead use the name of the less powerful version, and put the level as 5.
 MOVE_TUPLE_EXAMPLE = ("ExampleMoveName",2) 
 
 #MINION DICT -> PUT YOUR DATA HERE!
-init_minion = {"codename": "dirtFish", #the codename that was used in-game for the image as well as for the species
+init_minion = {"codename": "dirtFish", #the codename that was used in-game for the image - include the evolution level as a number at the end
               "name": "Zanyu",        #the name that is used for displaying
-              "health": 485,          #the following stats are the MAXIMUM values. These will be converted by the above functions
+              "health": 485,          #the following stats are the MAXIMUM values. These will be converted for you :)
               "energy": 277,
               "speed": 170,
               "attack":260,
               "healing": 50,
               "numGems": 3,           #number of available gem sockets that arrive unlocked
-              "numLockedGems": 1,     #number of locked gem sockets. Must be greater than zero, less than 4 - existing sockets
-              "evoLevel": 1,          #The evolutionary level. 1 is the first minion, 2 is the second etc... (yes this can theoretically extend beyond 3)
+              "numLockedGems": 1,     #number of locked gem sockets. Must be greater than zero, less than 4 - existing sockets. TO be honest, can just be set to zero but who knows...
               "EXP_Gain_Rate": "HARD",#How easy it is to gain EXP. Make this harder for more "powerful" minions
               "StartingMoves": [("Pound",2)], #starting moves as List[MoveTuple]
               "SkillTree1": "GroundAttacker_Ground", #Each Skill Tree must have an equivalent in the BaseTalentTreeContainer. Create one if you need one!
@@ -62,16 +79,20 @@ init_minion = {"codename": "dirtFish", #the codename that was used in-game for t
 #SKILL TREE DICT -> Put your data here!
 init_skill_tree = {"name": "DirtFish_Flying", #The codename for the skill tree, as welll as the actual name (after the underscore)
                    #Each branch needs to be created, using a list for each branch, and a list for each MoveSlot, and a tuple for each move. Add an extra "True" to the MoveTuple if it is dependent on the previous move slot. Add items from left to right as it appears from top to bottom.
-                   "LeftBranch": [[("Focus",1),("Focus",2),("Focus",3)],[("Agility",1),("Agility",3)],[("Agility",4,True)]], 
-                   "MiddleBranch": [[("Volley",1),("Volley",2)],[("Flurry",2),("Flurry",3),("Flurry",4)],[("Flurry",5,True)]],
-                   "RightBranch":[[("Wind Lance",1),("Wind Lance",2),("Wind Lance",3)],[("Hurricane",2),("Hurricane",3)],[("Titan Slam",2),("Titan Slam",4)],[("Titan Slam",5,True)]]
+                   "LeftBranch":  [[("Focus",1),("Focus",2),("Focus",3)],[("Agility",1),("Agility",3)],[("Agility",4,True)]], 
+                   "MiddleBranch":[[("Volley",1),("Volley",2)],[("Flurry",2),("Flurry",3),("Flurry",4)],[("Flurry",5,True)]],
+                   "RightBranch": [[("Wind Lance",1),("Wind Lance",2),("Wind Lance",3)],[("Hurricane",2),("Hurricane",3)],[("Titan Slam",2),("Titan Slam",4)],[("Titan Slam",5,True)]]
                    }
 
 def MoveToGameName(name:str,level:int):
   """Converts a name with a level to the in-game representation of it.
   So parameters of 'Steel Spike', 1 would yield 'steel_spike_t1'
+  I'll need to improve this to account for final-tier moves being named differently... yayyy
   """
-  return name.lower().replace(" ","_")+ f"_t{level}" #all that's needed. If a particular move tries a different name it can change
+  if name[0] == "i": #thaw modded moves start with lowercase "i"
+    return f'Singleton.staticData.ModToMoveID["{name}_t{level}"]' #modded implementation
+  else:
+    return "MinionMoveID."+ name.lower().replace(" ","_")+ f"_t{level}" #all that's needed. If a particular move tries a different name it can change
 
 def AutoIndent(in_str:str,amount:int=2):
   """Indents the input string by the amount. Defaults to the one required for Talent Trees and Minions.
@@ -136,54 +157,62 @@ def AutoSkillTree(init_dict):
 
 def AutoMinionCreator(init_dict,isForModEco=True):
   """Creates the necessary minion code from an input dict to be able to add into the game!
+  Just input an init_dict as per the example init_minion, and this returns a stunning game-ready text to put in!
+
+  Doesn't work for modded types or moves (new system for those)
+
+  If you're a pro, then you can change the "isForModEco" to "False" for a permanent change into the game, or leave as "True" to integrate in the mod toggle system
   """
   #verification stuff
   try:
-    if init_dict["evolvesFrom"]:
-      evolvesFrom = init_dict["evolvesFrom"] 
-  except:
-    evolvesFrom = None
-  try:
-    if init_dict["evolvesTo"]:
+    if init_dict["evolvesTo"]: # no "evolvesFrom" because that isn't required :>
       evolvesTo = init_dict["evolvesTo"]
   except:
     evolvesTo = None
   name = init_dict["name"]
   codename = init_dict["codename"] 
-  output = f"private function {codename}_stage{init_dict['evoLevel']}() : void\n" + "{\n\tvar _loc2_:MinionTalentTree = null;\n\t" #declaration
+  try:
+    if codename[-1].isdigit():
+      evoLevel = codename[-1]
+      codename = codename[:-1]
+    else:
+      evoLevel = 1
+  except:
+    evoLevel = 1
+
+  output = f"private function {codename}_stage{evoLevel}() : void\n" + "{\n\tvar _loc2_:MinionTalentTree = null;\n\t" #declaration
 
   #MAIN CONSTRUCTOR
   if not isForModEco:
     output += f'var _loc1_:BaseMinion = this.CM(MinionDexID.DEX_ID_{codename}_{init_dict["evoLevel"]}'
   else:
-    output += f'var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["{codename}_{init_dict["evoLevel"]}"]'
+    output += f'var _loc1_:BaseMinion = this.CM(Singleton.staticData.ModToDexID["{codename}{evoLevel}"]'
     
-  output += f',"{name}","{codename}",{round(ReverseMinionHealthSimple(init_dict["health"]))},{round(ReverseMinionEnergySimple(init_dict["energy"]))},{round(ReverseMinionAttackSimple(init_dict["attack"]))},{round(ReverseMinionHealingSimple(init_dict["healing"]))},{round(ReverseMinionSpeedSimple(init_dict["speed"]))}'
+  output += f',"{name}","{codename}",{round(ReverseMinionHealth(init_dict["health"],init_dict["level"]))},{round(ReverseMinionStat(init_dict["energy"],init_dict["level"],isEnergy=True))},{round(ReverseMinionStat(init_dict["attack"],init_dict["level"]))},{round(ReverseMinionStat(init_dict["healing"],init_dict["level"]))},{round(ReverseMinionStat(init_dict["speed"],init_dict["level"]))}'
   
   #ADDING TYPES
-  if len(init_dict["Types"]) == 2 and type(init_dict["Types"]) == list:
-    output += f",MinionType.TYPE_{init_dict['Types'][0]},MinionType.{init_dict['Types'][1]});\n\t"
-  elif len(init_dict["Types"]) == 2 and type(init_dict["Types"]) == list:
-    output += f",MinionType.TYPE_{init_dict['Types'][0]});\n\t"
-  else: #assume it's just the type itself instead of list
-    if type(init_dict["Types"]) == str: 
-      output += f",MinionType.TYPE_{init_dict['Types']});\n\t"
-    else:  raise ValueError("Mismatched type length")
+  for typie in init_dict["Types"]:
+    if typie in ["Thaw"]:
+      output += f',Singleton.staticData.ModToTypeID["{typie.lower()}"]'
+    else:
+      output += f",MinionType.TYPE_{typie.lower()}"
+  output = output + ");\n\t"
 
 #gems + icon positioning
   output += f"_loc1_.m_minionIconPositioningX = 0;\n\t_loc1_.m_minionIconPositioningY = 0;\n\t_loc1_.m_expGainRate = ExpGainRates.EXP_GAIN_RATE_{init_dict['EXP_Gain_Rate']}\n\t_loc1_.m_numberOfGems = {init_dict['numGems']};\n\t_loc1_.m_numberOfLockedGems = {init_dict['numLockedGems']};\n\t"
 
   #if evolves into something else
   if evolvesTo:
-    output += f"_loc1_.m_evolutionLevel = {evolvesTo[1]};\n\t" #level it evolves at
+    output += f"_loc1_.m_evolutionLevel = {evolvesTo};\n\t" #level it evolves at
 
   #starting moves
   for item in init_dict['StartingMoves']: #add starting moves
-    output += f'_loc1_.AddStartingMove(MinionMoveID.{MoveToGameName(item[0],item[1])});\n\t_loc1_.SetSpeacilizaionMoves('
-  
+    output += f'_loc1_.AddStartingMove({MoveToGameName(item[0],item[1])});\n\t'
+  output += "_loc1_.SetSpeacilizaionMoves("
   #specialising moves
   for item in init_dict['SpecialisationMoves']:
-    output += f'MinionMoveID.{MoveToGameName(item[0],item[1])},'
+    output += f'{MoveToGameName(item[0],item[1])},'
+  output = output.removesuffix(",")
   output += ');\n'
 
   #skill trees
@@ -192,7 +221,10 @@ def AutoMinionCreator(init_dict,isForModEco=True):
     output += f'\t_loc2_ = Singleton.staticData.m_baseTalentTreesList.{item}();\n\t_loc1_.SetTalentTree({count},_loc2_);\n'
     count += 1
   output += "}"
-
+  if not isForModEco:
+    print("WARNING: Make sure to add the relevant DexID in MinionDexID.as within the SWF, as well as call the function with all the others within AllMinionsContainer.as")
+  else:
+    print("WARNING: Make sure to add mod toggle in ModMenu + StaticData, and call function like other mods within AllMinionsContainer.as")
   return output
 
 
@@ -200,10 +232,11 @@ def AutoMinionCreator(init_dict,isForModEco=True):
 #skill tree creation
 #print(AutoSkillTree(init_skill_tree))
 
-
+'''
 #Minion creation test
-print("INTO 'All<inionsContainer.as': ")
+print("INTO 'AllMinionsContainer.as': ")
 print(AutoMinionCreator(init_minion)+"\n")
+'''
 
 '''
 print("NOTE: The following extra modifications will be needed:")
