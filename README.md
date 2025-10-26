@@ -6,7 +6,7 @@ All the mods for Min Hero: Tower of Sages are to be compiled here, in a single f
 * Run with FlashPlayer (download from here or use your own: version must be 14+)
 * Done!
 This is forwards-compatiable, or you can use your old save with this one! Check "Save Compatiability" section.
-This is **NOT backwards-compatiable**, so if you create a save that contains Zanyu, it cannot be used in the normal game. This is because if the game detects a modded minion without the right tools, it breaks the game. Check "Cleaning a Modded Save" in guides.md.
+This is **NOT backwards-compatible**, so if you create a save that contains Zanyu, it cannot be used in the normal game. This is because if the game detects a modded minion without the right tools, it breaks the game. Check "Cleaning a Modded Save" in guides.md.
 
 
 ### Save Compatiability
