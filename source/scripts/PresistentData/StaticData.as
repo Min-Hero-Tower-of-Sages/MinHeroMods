@@ -179,7 +179,7 @@ package PresistentData
          }
          this.m_all_minion_mods.push("BMod 1","BMod 2","BMod 3"); //used to setup the DexID, hence after output
          this.m_all_other_mods = new Vector.<String>();
-         this.m_all_other_mods.push("iceFloor","nuzlocke");
+         this.m_all_other_mods.push("iceFloor","nuzlocke", "no_natural_regen", "no_natural_regen");
          trace("All known other mods:");
          for each(var mod in this.m_all_other_mods)
          {

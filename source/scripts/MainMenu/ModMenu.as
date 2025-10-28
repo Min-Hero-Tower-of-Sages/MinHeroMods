@@ -49,7 +49,7 @@ package MainMenu
       {
          super();
          this.m_toggleTexts = new Vector.<String>();
-         this.m_toggleTexts.push("Zanyu","Stingaray","Arkvian","Ophan", "Ice Floor", "Nuzlocke"); //still need this for ordering. Make as small as possibe
+         this.m_toggleTexts.push("Zanyu","Stingaray","Arkvian","Ophan", "Ice Floor", "Nuzlocke", "No Regen Lite", "No Regen"); //still need this for ordering. Make as small as possibe
          this.m_toggleDict = new Dictionary();
          this.m_toggleDict["Example"] = ["Tooltip description about the Example mod.", "Toggle1 (the minion)", "Extra toggles like this"];
          this.m_toggleDict["Zanyu"] = ["Bring the might of the legendary beast to your team! Featuring a custom Skill Tree, and powerful moves, they can be found in Floor 5-2!", "dirtFish"];
@@ -57,7 +57,9 @@ package MainMenu
          this.m_toggleDict["Arkvian"] = ["A holy counterpart to Airmony and Falcona, a serene bird prepared to become the next party member! Soar to Arkvian in Floor 1-4 and Arkclaw in Floor 4-2", "holyBirb1", "holyBirb2"];
          this.m_toggleDict["Ophan"] = ["Cultivate a curious one-eyed creature into a fast, lethal minion under your command! Find Ophan in 4-2 and Adophan in 5-3!", "HolyEye1", "HolyEye2", "HolyEye3"];
          this.m_toggleDict["Ice Floor"] = ["The Ice Floor is now available. Adventure through this chilly domain through the side entrance, and discover new minions, moves and Trainers!", "iMammoth1", "iMammoth2", "iMammoth3","iUnicorn1","iUnicorn2", "iUnicorn3", "iSloth1", "iSloth2", "iSloth3", "iSeal1", "iSeal2", "iSeal3", "iceFloor"] //toggles are all Ice Floor minion mods (used for DexID), and the general-purpose "iceFloor" toggle
-         this.m_toggleDict["Nuzlocke"] = ["A challenging new way to play! If your minion faints, it's gone for good!", "nuzlocke", ""];
+         this.m_toggleDict["Nuzlocke"] = ["If your minion faints, it's gone for good!", "nuzlocke"];
+         this.m_toggleDict["No Natural Lite"] = ["Your Minions will only regenerate their health when going to the Lobby.", "no_natural_regen_lite"];
+         this.m_toggleDict["No Regen"] = ["Your Minions will not regenerate their health naturally.", "no_natural_regen"];
       }
       
       public function LoadSprites() : void
