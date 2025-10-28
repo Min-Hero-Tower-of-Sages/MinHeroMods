@@ -198,10 +198,10 @@ package Minions
          ownedMinionData += "\"minionForDOTsAndHOTs\": [" + this.vectorToString(this.m_minionForDOTsAndHOTs) + "], ";
          ownedMinionData += "\"currMovesOnCoolDown\": [" + this.m_currMovesOnCoolDown.join(", ") + "], ";
          ownedMinionData += "\"turnsMovesOnCoolDownHaveBeenIn\": [" + this.m_turnsMovesOnCoolDownHaveBeenIn.join(", ") + "], ";
-         ownedMinionData += "\"currHealth\": " + this.currHealth + ", ";
-         ownedMinionData += "\"currEnergy\": " + this.currEnergy + ", ";
-         ownedMinionData += "\"currShield\": " + this.currShield + ", ";
-         ownedMinionData += "\"maxShield\": " + this.maxShield + ", ";
+         ownedMinionData += "\"currHealth\": " + this.m_currHealth + ", ";
+         ownedMinionData += "\"currEnergy\": " + this.m_currEnergy + ", ";
+         ownedMinionData += "\"currShield\": " + this.m_currShield + ", ";
+         ownedMinionData += "\"maxShield\": " + this.m_maxShield + ", ";
          ownedMinionData += "\"isBattleModShieldActive\": " + this.m_isBattleModShieldActive + ", ";
          ownedMinionData += "\"isExtraBattleModMinion\": " + this.m_isExtraBattleModMinion + ", ";
          ownedMinionData += "\"currExhaust\": " + this.m_currExhaust + ", ";
@@ -1330,6 +1330,7 @@ package Minions
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "name"] = this.m_minionName;
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "exp"] = this.m_currentExp;
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "statBonus"] = this.m_statBonus;
+         Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "currHealth"] = this._currHealth;
          var _loc2_:int = 0;
          while(_loc2_ < this._allMoves.length)
          {
@@ -1365,6 +1366,7 @@ package Minions
          this.m_minionName = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "name"];
          this.m_currentExp = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "exp"];
          this.m_statBonus = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "statBonus"];
+         this.m_currHealth = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "currHealth"];
          var _loc2_:int = 0;
          while(_loc2_ < this._allMoves.length)
          {
