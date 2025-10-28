@@ -1064,14 +1064,14 @@ package PresistentData
          return _loc2_;
       }
       
-      public function HealAllOfAPlayersInPartyMinions() : void
+      public function HealAllOfAPlayersInPartyMinions(bypass:Boolean = false) : void
       {
          var _loc1_:int = 0;
          while(_loc1_ < 5)
          {
             if(this.m_ownedMinions[_loc1_] != null)
             {
-               this.m_ownedMinions[_loc1_].ReFillHealthAndEnergy();
+               this.m_ownedMinions[_loc1_].ReFillHealthAndEnergy(bypass);
             }
             _loc1_++;
          }

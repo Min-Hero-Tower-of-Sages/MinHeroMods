@@ -196,6 +196,9 @@ package TopDown.Levels.MainTower
          m_roomBounds.graphics.beginFill(0);
          m_roomBounds.graphics.drawRect(0,0,3051.45,2202.15);
          m_roomBounds.graphics.endFill();
+         if (Singleton.dynamicData.m_isMod["no_natural_regen"]) {
+            Singleton.dynamicData.HealAllOfAPlayersInPartyMinions(true);
+         }
          Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer.addChild(m_roomBounds);
          AddObject("generalRoom_floorTile",1926.45,470.2,1,1,0);
          AddObject("generalRoom_floorTile",2046.4,470.2,1,1,0);

@@ -716,11 +716,15 @@ package Minions
          this.m_currentExp = param1 * 1000;
       }
       
-      public function ReFillHealthAndEnergy() : void
+      public function ReFillHealthAndEnergy(bypass:Boolean = true) : void
       {
          this.ClearBuffsAndDebuffs();
          this.CalculateCurrStats();
-         this.m_currHealth = this.m_currHealthStat;
+
+         var blockNatural:Boolean = Singleton.dynamicData.m_isMod["no_natural_regen"] === true;
+         if (bypass || !blockNatural) {
+            this.m_currHealth = this.m_currHealthStat;
+         }
          this.m_currEnergy = this.m_currEnergyStat;
       }
       
@@ -1202,7 +1206,7 @@ package Minions
       public function set m_currHealth(param1:int) : void
       {
          this._currHealth = param1;
-         if(this._currHealth > this.m_currHealthStat)
+         if(this._currHealth > this.m_currHealthStat && Singleton.dynamicData.m_isMod["no_natural_regen"] == false)
          {
             this._currHealth = this.m_currHealthStat;
          }
