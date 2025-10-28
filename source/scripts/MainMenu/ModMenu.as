@@ -20,7 +20,7 @@ package MainMenu
 
       // mask position
       private static const MASK_X:int           = 5;
-      private static const MASK_Y:int           = 30;
+      private static const MASK_Y:int           = 55;
 
       // first row y relative to holder
       private static const FIRST_ROW_OFFSET:int = 11;
@@ -99,14 +99,14 @@ package MainMenu
             this.m_settingTexts[i].wordWrap = true;
             this.m_settingTexts[i].autoSize = TextFieldAutoSize.LEFT;
             this.m_settingTexts[i].text = this.m_toggleTexts[i];
-            this.m_settingTexts[i].width = 80;
-            this.m_settingTexts[i].x = 10;
+            this.m_settingTexts[i].width = 115;
+            this.m_settingTexts[i].x = 5;
             this.m_settingTexts[i].y = FIRST_ROW_OFFSET + i * ITEM_STRIDE;
             this.m_settingTexts[i].selectable = false;
             this.m_modSelectHolder.addChild(this.m_settingTexts[i]);
 
             this.m_toggleButtons[i] = new ToggleButton(this.ToggleCarousel,"menus_settings_onButton","menus_settings_offButton","","",this.m_toggleTexts[i]);
-            this.m_toggleButtons[i].x = 98;
+            this.m_toggleButtons[i].x = 128;
             this.m_toggleButtons[i].y = FIRST_ROW_OFFSET + i * ITEM_STRIDE;
             this.m_modSelectHolder.addChild(this.m_toggleButtons[i]);
             i++;
