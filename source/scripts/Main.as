@@ -76,7 +76,7 @@ package
          Singleton.dynamicData.ResetOpponentsMinions();
          Singleton.dynamicData.SetHasUnlockedFloor(0,true);
          Singleton.dynamicData.SetHasTutorialBeenSeen(TutorialTypes.TUTORIAL_FOCUS_TARGETS,true);
-         Singleton.dynamicData.m_isAutoSaveOn = true;
+         Singleton.dynamicData.m_isAutoSaveOn = false;
          Singleton.utility.m_screenControllers.SetSceneTo(GameState.MAIN_MENU,false);
          //Singleton.dynamicData.SetNewReturnToOnDeathPoint(); //was commented
          addEventListener(Event.ENTER_FRAME,this.Update);
