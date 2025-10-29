@@ -40,7 +40,6 @@ The latest *committed* version, the default.swf that you find here, and not in r
 
 Core (things that are present across all versions)
 * Fix the spelling mistakes in the code. It's so easy to do, we might as well
-* Add scrolling ability to the mod list
  
 Multi (things just for the multiplayer as that's going to enter here RAAH)
 * Check BattleSystem for socket entry point
