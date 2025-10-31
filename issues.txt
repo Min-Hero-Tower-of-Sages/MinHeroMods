@@ -5,6 +5,7 @@ All the issues that currently plague the SWF will be detailed here:
   * From activation of TopDownMovementScreen
   * Caused by m_roomBounds not being present in m_bottomVisualLayer of m_topDownMovementScreen
   * TO FIX: research how the hail does the roomBounds work, as there must be some kind of triggering thing that got missed....
+  * Also an issue when loading into the same save file after exiting again.
 
 * Zooms into the main menu door when exiting a save file (occasional)
   * then errors as above
@@ -19,6 +20,7 @@ SecurityError: Error #2148: SWF file file:///D|/Min%20HEROOO/MinHeroMods/default
 ***
 * Caused by idling on character creation screen
 
+*** When speeding, replays the fade out.
 
 VANILLA ISSUES (can be "ignored" due to niche case, solvability in-game, or quirk of Flash)
 

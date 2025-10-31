@@ -228,8 +228,8 @@ package MainMenu
          if (this.m_upButton)   this.m_upButton.Update();
          if (this.m_downButton) this.m_downButton.Update();
 
-         var i:int = 0;
-         while(i < this.m_toggleButtons.length)
+         var i:int = this.m_scrollPosition;
+         while(i < VISIBLE_COUNT+this.m_scrollPosition)
          {
             this.m_toggleButtons[i].Update();
             i++;

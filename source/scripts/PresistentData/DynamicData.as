@@ -142,6 +142,8 @@ package PresistentData
       public var m_isMod:Dictionary;
       
       private var socketManager:SocketManager;
+
+      public var m_FloorType:String; //I am going to make this decide what floors are loaded
       
       public function DynamicData()
       {

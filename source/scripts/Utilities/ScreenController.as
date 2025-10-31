@@ -79,6 +79,7 @@ package Utilities
                this.m_mainMenuScreen.StartActivate();
                break;
             case GameState.BATTLE_SCREEN:
+               trace("Going to battle screen...")
                Singleton.utility.m_stage.addChild(this.m_battleScreen);
                this.m_battleScreen.visible = false;
                this.m_battleScreen.StartActivate();
@@ -90,9 +91,10 @@ package Utilities
                this.m_topDownScreen.StartActivate();
                break;
             case GameState.LEVEL_SELECT_SCREEN:
+               trace("Going to Tower viewer...")
                Singleton.utility.m_stage.addChild(this.m_levelSelectScreen);
                this.m_levelSelectScreen.visible = false;
-               this.m_levelSelectScreen.StartActivate();
+               this.m_levelSelectScreen.StartActivate(); //this will import Singleton internally.
                break;
             case GameState.SITE_LOCKED_SCREEN:
                Singleton.utility.m_stage.addChild(this.m_siteLockedScreen);
