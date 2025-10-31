@@ -198,10 +198,10 @@ package Minions
          ownedMinionData += "\"minionForDOTsAndHOTs\": [" + this.vectorToString(this.m_minionForDOTsAndHOTs) + "], ";
          ownedMinionData += "\"currMovesOnCoolDown\": [" + this.m_currMovesOnCoolDown.join(", ") + "], ";
          ownedMinionData += "\"turnsMovesOnCoolDownHaveBeenIn\": [" + this.m_turnsMovesOnCoolDownHaveBeenIn.join(", ") + "], ";
-         ownedMinionData += "\"currHealth\": " + this.currHealth + ", ";
-         ownedMinionData += "\"currEnergy\": " + this.currEnergy + ", ";
-         ownedMinionData += "\"currShield\": " + this.currShield + ", ";
-         ownedMinionData += "\"maxShield\": " + this.maxShield + ", ";
+         ownedMinionData += "\"currHealth\": " + this.m_currHealth + ", ";
+         ownedMinionData += "\"currEnergy\": " + this.m_currEnergy + ", ";
+         ownedMinionData += "\"currShield\": " + this.m_currShield + ", ";
+         ownedMinionData += "\"maxShield\": " + this.m_maxShield + ", ";
          ownedMinionData += "\"isBattleModShieldActive\": " + this.m_isBattleModShieldActive + ", ";
          ownedMinionData += "\"isExtraBattleModMinion\": " + this.m_isExtraBattleModMinion + ", ";
          ownedMinionData += "\"currExhaust\": " + this.m_currExhaust + ", ";
@@ -716,11 +716,15 @@ package Minions
          this.m_currentExp = param1 * 1000;
       }
       
-      public function ReFillHealthAndEnergy() : void
+      public function ReFillHealthAndEnergy(bypass:Boolean = true) : void
       {
          this.ClearBuffsAndDebuffs();
          this.CalculateCurrStats();
-         this.m_currHealth = this.m_currHealthStat;
+
+         var blockNatural:Boolean = Singleton.dynamicData.m_isMod["no_natural_regen"] === true;
+         if (bypass || !blockNatural) {
+            this.m_currHealth = this.m_currHealthStat;
+         }
          this.m_currEnergy = this.m_currEnergyStat;
       }
       
@@ -1202,7 +1206,7 @@ package Minions
       public function set m_currHealth(param1:int) : void
       {
          this._currHealth = param1;
-         if(this._currHealth > this.m_currHealthStat)
+         if(this._currHealth > this.m_currHealthStat && Singleton.dynamicData.m_isMod["no_natural_regen"] == false)
          {
             this._currHealth = this.m_currHealthStat;
          }
@@ -1326,6 +1330,7 @@ package Minions
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "name"] = this.m_minionName;
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "exp"] = this.m_currentExp;
          Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "statBonus"] = this.m_statBonus;
+         Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "currHealth"] = this._currHealth;
          var _loc2_:int = 0;
          while(_loc2_ < this._allMoves.length)
          {
@@ -1361,6 +1366,7 @@ package Minions
          this.m_minionName = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "name"];
          this.m_currentExp = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "exp"];
          this.m_statBonus = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "statBonus"];
+         this.m_currHealth = Singleton.dynamicData.m_sharedObject.data["minion" + param1 + "currHealth"];
          var _loc2_:int = 0;
          while(_loc2_ < this._allMoves.length)
          {

@@ -39,6 +39,9 @@ package TopDown.Levels.MainTower
       
       override protected function PreformButtonAction(param1:int) : void
       {
+         if (Singleton.dynamicData.m_isMod["no_natural_regen"] == true) {
+            Singleton.dynamicData.HealAllOfAPlayersInPartyMinions(true);
+         }
          var _loc2_:StandardChatBox = null;
          var _loc3_:MainChar = Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_mainChar;
          if(_loc3_.m_chatBox.m_isOpen)

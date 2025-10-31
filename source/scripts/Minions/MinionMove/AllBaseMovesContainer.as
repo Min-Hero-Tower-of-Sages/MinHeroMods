@@ -57,24 +57,6 @@ package Minions.MinionMove
          var _loc5_:Array = null;
          var _loc6_:Array = null;
 
-         /** COMMENTED OUT BECAUSE IT'S REALLY LONG TO ADD (new debuff mechanic needed)
-         _loc2_ = new Array(5,10,13,20,25); //energy
-         _loc3_ = new Array(-1,-2,-3,-4,-5); //stages to debuff by
-         _loc1_ = this.CreateMove("Slippery Ground",_loc2_[0],MoveClassDict["iSland"],MoveDict["iSland"],"moveIcon_iSland",TypeID,MinionVisualMoveID.VISUALS_SameAsClass); //VISUALS_SameAsClass will just return MoveClassDict value, which is fine as that can be used in StaticData just fine.
-         _loc1_.m_doesDeBuffTargets = true;
-         _loc1_.m_stagesOfStatTypeToDeBuff = _loc3_[0]; //stages of stat type to debuff is just an index for the decimal multiplier to apply to stat. So -1 references the first index (i.e 0) in StaticData's m_statStageDecreaseAmounts, which is 0.8, hence -20% speed
-         _loc1_.AddStatToDeBuff(StatType.STAT_SPEED);
-         _loc1_ = this.CopyMove(_loc1_,_loc2_[1]);
-         _loc1_.m_stagesOfStatTypeToDeBuff = _loc3_[1];
-         _loc1_ = this.CopyMove(_loc1_,_loc2_[2]);
-         _loc1_.m_stagesOfStatTypeToDeBuff = _loc3_[2];
-         _loc1_ = this.CopyMove(_loc1_,_loc2_[3]);
-         _loc1_.m_stagesOfStatTypeToDeBuff = _loc3_[3];
-         _loc1_ = this.CopyMove(_loc1_,_loc2_[4],"Cripple");
-         _loc1_.m_stagesOfStatTypeToDeBuff = _loc3_[4];
-         **/
-
-
          _loc2_ = new Array(5,8,10,20,35); //energy
          _loc3_ = new Array(10,10,20,20,40); //damage
          _loc4_ = new Array(30,45,45,60,60); //additional random damage
